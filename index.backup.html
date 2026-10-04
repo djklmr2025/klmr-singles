@@ -48,12 +48,6 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
 #mini img{width:34px;height:60px;object-fit:cover;border-radius:6px}
 #mini b{flex:1;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #mini button{background:var(--cy);color:#07060f;border:0;border-radius:50%;width:42px;height:42px;font-size:17px;cursor:pointer}
-#dl {position:fixed;inset:0;z-index:10;background:#07060f;display:none;overflow:auto;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
-#dl.show {display:block}
-.frm {display:flex;flex-direction:column;gap:12px;margin-top:20px}
-.frm input {background:#14122a;color:var(--tx);border:1px solid #38e8ff55;padding:12px;border-radius:8px;font-size:16px}
-.frm button {background:linear-gradient(135deg,var(--cy),var(--pk));color:#07060f;border:0;padding:14px;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer}
-.frm button.alt {background:#ffffff1a;color:var(--tx);border:0}
 </style>
 </head>
 <body>
@@ -130,11 +124,6 @@ function load(n) {
 }
 function route() {
   const m = location.hash.match(/^#\/(\d+)$/), n = m ? +m[1] : 0;
-    if (location.hash === "#/descargas") {
-    document.getElementById("dl").classList.add("show");
-  } else {
-    document.getElementById("dl").classList.remove("show");
-  }
   if (n >= 1 && n <= T.length) {
     if (n !== cur) load(n);
     $("pv").classList.add("show"); document.body.style.overflow = "hidden";
@@ -147,7 +136,7 @@ function toggle() { if (!cur) return; a.paused ? a.play().catch(() => { $("msg")
 
 $("pp").onclick = toggle; $("mp").onclick = e => { e.stopPropagation(); toggle(); };
 $("pr").onclick = () => step(-1); $("nx").onclick = () => step(1);
-$("back").onclick = () => { location.hash = ""; history.replaceState(null, "", location.pathname + location.search); route(); document.getElementById("dl").classList.remove("show"); };
+$("back").onclick = () => { location.hash = ""; history.replaceState(null, "", location.pathname + location.search); route(); };
 $("mini").onclick = () => go(cur, false);
 a.addEventListener("play", () => { $("pp").textContent = $("mp").textContent = "⏸"; });
 a.addEventListener("pause", () => { $("pp").textContent = $("mp").textContent = "▶"; });
@@ -171,169 +160,5 @@ a.addEventListener("play", () => { if ($("vb").classList.contains("show")) close
 if (/; wv\)|iPhone|iPad/.test(navigator.userAgent)) $("apkbox").hidden = true;
 addEventListener("hashchange", route); route();
 </script>
-<section id="dl" aria-label="Descargas Premium">
-  <div class="wrap">
-    <button id="dl-back" style="align-self:flex-start;background:#ffffff1a;color:var(--tx);border:0;border-radius:99px;padding:9px 16px;font-size:15px;cursor:pointer">← Regresar</button>
-    <h2 style="text-align:center;margin-top:20px">Descargas Premium</h2>
-    <div id="dl-content">
-      <p style="color:var(--mu);text-align:center">Cargando...</p>
-    </div>
-  </div>
-</section>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-  import { getFirestore, doc, getDoc, writeBatch, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-
-  // TODO: Reemplaza con tu configuración de Firebase
-    const firebaseConfig = {
-    apiKey: "AIzaSyAEZr1AsUJPLNDMz7eRHJYvQU70SOoaEdI",
-    authDomain: "arkaios-world.firebaseapp.com",
-    projectId: "arkaios-world",
-    storageBucket: "arkaios-world.firebasestorage.app",
-    messagingSenderId: "502663599735",
-    appId: "1:502663599735:web:something" // This is fine for web auth
-  };
-
-  let app, auth, db;
-  try {
-    app = initializeApp(firebaseConfig);
-    auth = getAuth(app);
-    db = getFirestore(app);
-  } catch(e) {
-    console.log("Firebase no configurado aún.");
-  }
-
-  const dl = document.getElementById("dl");
-  const dc = document.getElementById("dl-content");
-  document.getElementById("dl-back").onclick = () => { location.hash = ""; document.getElementById("dl").classList.remove("show"); };
-
-  function renderLogin() {
-    dc.innerHTML = 
-      <p style="color:var(--mu);text-align:center;margin-bottom:10px">Inicia sesión o regístrate para acceder a tus descargas.</p>
-      <div class="frm">
-        <input type="email" id="f-email" placeholder="Correo electrónico">
-        <input type="password" id="f-pass" placeholder="Contraseña">
-        <button id="btn-login">Iniciar Sesión</button>
-        <button id="btn-reg" class="alt">Crear Cuenta Nueva</button>
-        <p id="f-msg" style="color:#ff8a8a;text-align:center"></p>
-      </div>
-    ;
-    document.getElementById("btn-login").onclick = async () => {
-      try {
-        await signInWithEmailAndPassword(auth, document.getElementById("f-email").value, document.getElementById("f-pass").value);
-      } catch(e) { document.getElementById("f-msg").textContent = e.message; }
-    };
-    document.getElementById("btn-reg").onclick = async () => {
-      try {
-        const cred = await createUserWithEmailAndPassword(auth, document.getElementById("f-email").value, document.getElementById("f-pass").value);
-        await sendEmailVerification(cred.user);
-        renderVerify();
-      } catch(e) { document.getElementById("f-msg").textContent = e.message; }
-    };
-  }
-
-  function renderVerify() {
-    dc.innerHTML = 
-      <p style="color:var(--mu);text-align:center;margin-bottom:10px">Por favor verifica tu correo electrónico para continuar.</p>
-      <div class="frm">
-        <button id="btn-check">Ya lo verifiqué</button>
-        <button id="btn-resend" class="alt">Reenviar correo de verificación</button>
-        <button id="btn-out" class="alt">Cerrar Sesión</button>
-        <p id="f-msg" style="color:#ff8a8a;text-align:center"></p>
-      </div>
-    ;
-    document.getElementById("btn-check").onclick = async () => {
-      await auth.currentUser.reload();
-      checkAccess();
-    };
-    document.getElementById("btn-resend").onclick = async () => {
-      await sendEmailVerification(auth.currentUser);
-      document.getElementById("f-msg").textContent = "Correo reenviado.";
-    };
-    document.getElementById("btn-out").onclick = () => signOut(auth);
-  }
-
-  function renderCode() {
-    dc.innerHTML = 
-      <p style="color:var(--mu);text-align:center;margin-bottom:10px">Ingresa tu código premium para desbloquear las descargas.</p>
-      <div class="frm">
-        <input type="text" id="f-code" placeholder="Código (ej. VIP2026)" style="text-transform:uppercase">
-        <button id="btn-code">Canjear Código</button>
-        <button id="btn-out" class="alt">Cerrar Sesión</button>
-        <p id="f-msg" style="color:#ff8a8a;text-align:center"></p>
-      </div>
-    ;
-    document.getElementById("btn-code").onclick = async () => {
-      const code = document.getElementById("f-code").value.trim().toUpperCase();
-      if(!code) return;
-      try {
-        const batch = writeBatch(db);
-        const codeRef = doc(db, "codes", code);
-        const userRef = doc(db, "users", auth.currentUser.uid);
-        batch.update(codeRef, { used: true, usedBy: auth.currentUser.uid });
-        batch.set(doc(db, 'entitlements', auth.currentUser.uid), { hasAccess: true, codeUsed: code });
-        await batch.commit();
-        checkAccess();
-      } catch(e) {
-        document.getElementById("f-msg").textContent = "Código inválido o ya usado.";
-      }
-    };
-    document.getElementById("btn-out").onclick = () => signOut(auth);
-  }
-
-  async function renderLinks() {
-    dc.innerHTML = <p style="color:var(--mu);text-align:center">Cargando descargas...</p>;
-    try {
-      
-      const snap = await getDocs(collection(db, 'downloads'));
-      if(!snap.empty) {
-        const data = {}; snap.forEach(d => data[d.data().title || d.id] = d.data().link);
-        let html = <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px">;
-        for(const [name, url] of Object.entries(data)) {
-          html += <a href=" + url + " target="_blank" class="apk" style="text-align:center;text-decoration:none"> + name + </a>;
-        }
-        html += <button id="btn-out" class="alt" style="margin-top:20px;padding:12px;background:#ffffff1a;color:var(--tx);border:0;border-radius:8px">Cerrar Sesión</button></div>;
-        dc.innerHTML = html;
-        document.getElementById("btn-out").onclick = () => signOut(auth);
-      } else {
-        dc.innerHTML = <p>No hay descargas disponibles por ahora.</p>;
-      }
-    } catch(e) {
-      dc.innerHTML = <p style="color:#ff8a8a;text-align:center">Error al cargar los enlaces.</p>;
-    }
-  }
-
-  async function checkAccess() {
-    if (!auth || !auth.currentUser) return renderLogin();
-    if (!auth.currentUser.emailVerified) return renderVerify();
-    try {
-      const userSnap = await getDoc(doc(db, 'entitlements', auth.currentUser.uid));
-      if(userSnap.exists() && userSnap.data().hasAccess) {
-        renderLinks();
-      } else {
-        renderCode();
-      }
-    } catch(e) {
-      renderCode(); // Si falla (por reglas) es que no tiene acceso
-    }
-  }
-
-  if(auth) {
-    onAuthStateChanged(auth, user => {
-      if(document.getElementById("dl").classList.contains("show")) {
-        checkAccess();
-      }
-    });
-  }
-
-  window.addEventListener("hashchange", () => {
-    if(location.hash === "#/descargas" && auth) checkAccess();
-  });
-</script>
 </body>
 </html>
-
-
-
-
