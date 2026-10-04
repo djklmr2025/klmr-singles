@@ -1,44 +1,8 @@
-# KLMR Admin Scripts
-
-Estas son las instrucciones para administrar el backend con Firebase Admin SDK. Necesitarás Node.js y un archivo de credenciales de cuenta de servicio de Firebase.
-
-1. Instala el SDK: `npm install firebase-admin`
-2. El script asumirá que tienes `serviceAccountKey.json` (te indicaré la ruta).
-
-## 1. Importar Enlaces de Drive (Descargas)
-Crea o actualiza documentos en la colección `downloads`.
-```javascript
-const admin = require("firebase-admin");
-const serviceAccount = require("RUTA_A_TU_SERVICE_ACCOUNT.json");
-admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
-const db = admin.firestore();
-
-async function addDownload(id, title, link) {
-  await db.collection("downloads").doc(id).set({ title, link });
-  console.log("Añadido:", title);
-}
-addDownload("mp3-album", "Disco Completo MP3", "https://enlace-de-descarga.com/...");
-```
-
-## 2. Generar Códigos
-Crea códigos en la colección `codes`.
-```javascript
-async function createCode(code) {
-  await db.collection("codes").doc(code).set({ used: false, usedBy: null });
-  console.log("Código creado:", code);
-}
-createCode("VIP2026");
-```
-
-## 3. Revocar Usuarios
-Elimina o modifica los permisos en `entitlements` o desactiva la cuenta.
-```javascript
-async function revokeAccess(uid) {
-  // Elimina su derecho de acceso
-  await db.collection("entitlements").doc(uid).update({ hasAccess: false });
-  // Opcional: deshabilita su cuenta para que no pueda entrar
-  await admin.auth().updateUser(uid, { disabled: true });
-  console.log("Acceso revocado para UID:", uid);
-}
-```
-
+# Administración (en tu PC, con Node.js)
+1. `npm install`
+2. Descarga la clave de cuenta de servicio (Firebase > Configuración > Cuentas de servicio) y guárdala FUERA del repo.
+   En PowerShell: `$env:GOOGLE_APPLICATION_CREDENTIALS="C:\ARKAIOS\secretos\clave.json"`
+3. Enlaces: crea `links.local.json` (ignorado por git) con `[{"n":1,"title":"Pista 1","link":"https://..."}]` y corre `npm run import`
+4. Códigos: `npm run codes -- 10 regalo "Preventa"` (aleatorios; se guardan en `codes.local.csv`, ignorado por git)
+5. Revocar: `npm run revoke -- correo@ejemplo.com`
+6. Pruebas de reglas: `npm test` (levanta el emulador de Firestore)

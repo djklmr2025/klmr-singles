@@ -1,12 +1,38 @@
-
-// Pruebas del emulador (a-h) para Firestore Rules
-// Debes correr el emulador de Firebase para ejecutar estos tests.
-// a) Usuario no autenticado NO puede leer downloads
-// b) Usuario autenticado SIN correo verificado NO puede leer downloads
-// c) Usuario autenticado CON correo pero SIN entitlements NO puede leer downloads
-// d) Usuario con entitlements correctos SÍ puede leer downloads
-// e) Cualquiera autenticado puede leer un código para validarlo
-// f) Canjeo exitoso actualiza el código a used=true y entitlement hasAccess=true
-// g) Código ya usado NO puede volver a canjearse
-// h) Un usuario NO puede leer perfil/entitlements de otro
-
+import { initializeTestEnvironment, assertSucceeds, assertFails } from '@firebase/rules-unit-testing';
+import { readFileSync } from 'node:fs';
+import { before, after, beforeEach, test } from 'node:test';
+import { doc, getDoc, getDocs, collection, setDoc, updateDoc, writeBatch, serverTimestamp } from 'firebase/firestore';
+let env;
+before(async () => { env = await initializeTestEnvironment({ projectId: 'demo-klmr', firestore: { rules: readFileSync('firestore.rules', 'utf8'), host: '127.0.0.1', port: 8080 } }); });
+after(() => env.cleanup());
+beforeEach(async () => {
+  await env.clearFirestore();
+  await env.withSecurityRulesDisabled(async c => { const d = c.firestore();
+    await setDoc(doc(d, 'downloads/1'), { title: 'T', link: 'https://x.example/1' });
+    for (const k of ['AAAA', 'BBBB']) await setDoc(doc(d, 'codes/' + k), { usedBy: null, usedAt: null }); });
+});
+const user = (uid, v = true) => env.authenticatedContext(uid, { email_verified: v }).firestore();
+const redeem = (db, uid, code) => { const b = writeBatch(db);
+  b.update(doc(db, 'codes', code), { usedBy: uid, usedAt: serverTimestamp() });
+  b.set(doc(db, 'entitlements', uid), { active: true, code, createdAt: serverTimestamp() }); return b.commit(); };
+const dl = db => getDoc(doc(db, 'downloads/1'));
+test('a) anónimo no lee downloads', () => assertFails(dl(env.unauthenticatedContext().firestore())));
+test('b) sin correo verificado no lee', () => assertFails(dl(user('u1', false))));
+test('c) verificado sin entitlement no lee', () => assertFails(dl(user('u1'))));
+test('d) canje válido y luego lee', async () => { const d = user('u1'); await assertSucceeds(redeem(d, 'u1', 'AAAA')); await assertSucceeds(dl(d)); });
+test('e) get de un código sí; listar codes no', async () => { const d = user('u1');
+  await assertSucceeds(getDoc(doc(d, 'codes/AAAA'))); await assertFails(getDocs(collection(d, 'codes'))); });
+test('f) canje deja el código usado y el entitlement activo', async () => { await redeem(user('u1'), 'u1', 'AAAA');
+  await env.withSecurityRulesDisabled(async c => { const d = c.firestore();
+    if ((await getDoc(doc(d, 'codes/AAAA'))).data().usedBy !== 'u1') throw new Error('code');
+    if ((await getDoc(doc(d, 'entitlements/u1'))).data().active !== true) throw new Error('ent'); }); });
+test('g) código ya usado no se reutiliza', async () => { await redeem(user('u1'), 'u1', 'AAAA'); await assertFails(redeem(user('u2'), 'u2', 'AAAA')); });
+test('h) no se leen datos de otros', async () => { await redeem(user('u1'), 'u1', 'AAAA');
+  await assertFails(getDoc(doc(user('u2'), 'entitlements/u1'))); await assertFails(getDoc(doc(user('u2'), 'users/u1'))); });
+test('i) sin canjear código no se crea entitlement', () => assertFails(setDoc(doc(user('u1'), 'entitlements/u1'), { active: true, code: 'AAAA', createdAt: serverTimestamp() })));
+test('j) revocado: no lee ni puede reactivarse', async () => { const d = user('u1'); await redeem(d, 'u1', 'AAAA');
+  await env.withSecurityRulesDisabled(c => updateDoc(doc(c.firestore(), 'entitlements/u1'), { active: false }));
+  await assertFails(dl(d)); await assertFails(updateDoc(doc(d, 'entitlements/u1'), { active: true }));
+  await assertFails(setDoc(doc(d, 'entitlements/u1'), { active: true, code: 'AAAA', createdAt: serverTimestamp() })); });
+test('k) no se puede editar un código ajeno ni cambiar otros campos', async () => { await assertFails(updateDoc(doc(user('u1'), 'codes/AAAA'), { usedBy: 'otro', usedAt: serverTimestamp() }));
+  await assertFails(updateDoc(doc(user('u1'), 'codes/BBBB'), { usedBy: 'u1', usedAt: serverTimestamp(), extra: 1 })); });

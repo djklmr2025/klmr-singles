@@ -1,0 +1,5 @@
+node_modules/
+links.local.json
+codes.local.csv
+serviceAccount*.json
+*-firebase-adminsdk-*.json
