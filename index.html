@@ -24,6 +24,9 @@ header p{color:var(--mu);margin-top:8px}
 #vb.show{display:flex}
 #vb iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000}
 #vb a{color:var(--cy);text-align:center;font-size:14px}
+.apk{display:inline-block;margin-top:14px;background:linear-gradient(135deg,var(--cy),var(--pk));color:#07060f;font-weight:700;text-decoration:none;padding:11px 20px;border-radius:99px;font-size:15px}
+.apk:hover,.apk:focus-visible{filter:brightness(1.12);outline:2px solid var(--go);outline-offset:2px}
+header small{display:block;color:var(--mu);font-size:12px;margin-top:8px}
 footer{text-align:center;color:var(--mu);font-size:13px;padding:8px 16px}
 #pv{position:fixed;inset:0;z-index:5;overflow:auto;background:#07060f;display:none;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
 #pv.show{display:block}
@@ -51,6 +54,7 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
 <header>
   <h1>KLMR · SINGLES</h1>
   <p>CD TRCKAS · 28 canciones · toca una portada para escucharla completa</p>
+  <div id="apkbox"><a class="apk" href="https://github.com/djklmr2025/klmr-singles-app/raw/main/dist/KLMR-Singles.apk" rel="noopener">⬇ Descargar app para Android</a><small>Versión 1.0 · Android 5.0 o superior · APK directo (no está en Play Store)</small></div>
 </header>
 <main id="grid" aria-label="Singles"></main>
 <footer>Solo escucha en línea · © KLMR · Todos los derechos reservados</footer>
@@ -152,6 +156,8 @@ $("vd").onclick = () => {
   $("vb").classList.add("show"); $("vd").textContent = "✕ Cerrar video";
 };
 a.addEventListener("play", () => { if ($("vb").classList.contains("show")) closeVideo(); });
+// El botón de la app no se muestra dentro de la propia app (WebView) ni en iPhone/iPad.
+if (/; wv\)|iPhone|iPad/.test(navigator.userAgent)) $("apkbox").hidden = true;
 addEventListener("hashchange", route); route();
 </script>
 </body>
