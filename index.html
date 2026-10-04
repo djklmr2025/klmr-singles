@@ -60,7 +60,7 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
 <header>
   <h1>KLMR · SINGLES</h1>
   <p>CD TRCKAS · 28 canciones · toca una portada para escucharla completa</p>
-  <div id="apkbox"><a class="apk" href="https://github.com/djklmr2025/klmr-singles-app/raw/main/dist/KLMR-Singles.apk" rel="noopener">⬇ Descargar app para Android</a><small>Versión 1.0 · Android 5.0 o superior · APK directo (no está en Play Store)</small></div>
+  <div id="apkbox"><a class="apk" href="https://github.com/MI_USUARIO/klmr-singles-app/raw/main/dist/KLMR-Singles.apk" rel="noopener">⬇ Descargar app para Android</a><small>Versión 1.0 · Android 5.0 o superior · APK directo (no está en Play Store)</small></div>
 </header>
 <main id="grid" aria-label="Singles"></main>
 <footer>Solo escucha en línea · © KLMR · Todos los derechos reservados</footer>
@@ -186,14 +186,7 @@ addEventListener("hashchange", route); route();
   import { getFirestore, doc, getDoc, writeBatch, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
   // TODO: Reemplaza con tu configuración de Firebase
-    const firebaseConfig = {
-    apiKey: "AIzaSyAEZr1AsUJPLNDMz7eRHJYvQU70SOoaEdI",
-    authDomain: "arkaios-world.firebaseapp.com",
-    projectId: "arkaios-world",
-    storageBucket: "arkaios-world.firebasestorage.app",
-    messagingSenderId: "502663599735",
-    appId: "1:502663599735:web:something" // This is fine for web auth
-  };
+    const firebaseConfig = { /* PLACEHOLDER_FIREBASE_CONFIG */ };
 
   let app, auth, db;
   try {
@@ -333,6 +326,7 @@ addEventListener("hashchange", route); route();
 </script>
 </body>
 </html>
+
 
 
 

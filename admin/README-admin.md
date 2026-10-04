@@ -17,7 +17,7 @@ async function addDownload(id, title, link) {
   await db.collection("downloads").doc(id).set({ title, link });
   console.log("Añadido:", title);
 }
-addDownload("mp3-album", "Disco Completo MP3", "https://drive.google.com/...");
+addDownload("mp3-album", "Disco Completo MP3", "https://enlace-de-descarga.com/...");
 ```
 
 ## 2. Generar Códigos
@@ -41,3 +41,4 @@ async function revokeAccess(uid) {
   console.log("Acceso revocado para UID:", uid);
 }
 ```
+
