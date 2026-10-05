@@ -1,5 +1,5 @@
 { "name": "klmr-singles-admin", "private": true, "type": "module",
-  "scripts": { "test": "firebase emulators:exec --only firestore --project demo-klmr \"node --test test/\"",
+  "scripts": { "test": "firebase emulators:exec --only firestore --project demo-klmr \"node --test test/rules.test.js\"",
     "import": "node tools/import_links.js", "codes": "node tools/gen_codes.js", "revoke": "node tools/revoke.js" },
   "dependencies": { "firebase-admin": "^12.0.0" },
   "devDependencies": { "@firebase/rules-unit-testing": "^3.0.4", "firebase": "^10.8.1", "firebase-tools": "^13.0.0" } }

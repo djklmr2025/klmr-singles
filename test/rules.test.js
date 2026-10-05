@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { before, after, beforeEach, test } from 'node:test';
 import { doc, getDoc, getDocs, collection, setDoc, updateDoc, writeBatch, serverTimestamp } from 'firebase/firestore';
 let env;
-before(async () => { env = await initializeTestEnvironment({ projectId: 'demo-klmr', firestore: { rules: readFileSync('firestore.rules', 'utf8'), host: '127.0.0.1', port: 8080 } }); });
+before(async () => { env = await initializeTestEnvironment({ projectId: 'demo-klmr', firestore: { rules: readFileSync('firestore.rules', 'utf8') } }); });
 after(() => env.cleanup());
 beforeEach(async () => {
   await env.clearFirestore();
