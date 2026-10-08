@@ -24,6 +24,8 @@ header p{color:var(--mu);margin-top:8px}
 #vb.show{display:flex}
 #vb iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000}
 #vb a{color:var(--cy);text-align:center;font-size:14px}
+.btn-cd{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--go),var(--pk));color:#07060f;font-weight:700;text-decoration:none;padding:12px 22px;border-radius:99px;font-size:15px;align-self:center;text-align:center;box-shadow:0 4px 18px rgba(255,61,240,.35);transition:transform .2s,filter .2s,box-shadow .2s}
+.btn-cd:hover,.btn-cd:focus-visible{filter:brightness(1.12);transform:scale(1.03);outline:2px solid var(--cy);outline-offset:2px;box-shadow:0 6px 24px rgba(56,232,255,.5)}
 .apk{display:inline-block;margin-top:14px;background:linear-gradient(135deg,var(--cy),var(--pk));color:#07060f;font-weight:700;text-decoration:none;padding:11px 20px;border-radius:99px;font-size:15px}
 .apk:hover,.apk:focus-visible{filter:brightness(1.12);outline:2px solid var(--go);outline-offset:2px}
 header small{display:block;color:var(--mu);font-size:12px;margin-top:8px}
@@ -61,6 +63,9 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
 <header>
   <h1>KLMR · SINGLES</h1>
   <p>CD TRCKAS · 28 canciones · toca una portada para escucharla completa</p>
+  <div style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+    <a class="btn-cd" href="https://cd-trckas-plataforma.vercel.app/" target="_blank" rel="noopener">💿 Obtener el CD completo desde aquí</a>
+  </div>
   <div id="apkbox"><a class="apk" href="https://github.com/djklmr2025/klmr-singles-app/raw/main/dist/KLMR-Singles.apk" rel="noopener">⬇ Descargar app para Android</a><small>Versión 1.0 · Android 5.0 o superior · APK directo (no está en Play Store)</small></div>
 </header>
 <main id="grid" aria-label="Singles"></main>
@@ -81,6 +86,7 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
       <button id="pp" aria-label="Reproducir o pausar">▶</button>
       <button id="nx" aria-label="Siguiente">⏭</button>
     </div>
+    <a class="btn-cd" href="https://cd-trckas-plataforma.vercel.app/" target="_blank" rel="noopener">💿 Obtener el CD completo desde aquí</a>
     <button id="vd" hidden>▶ Ver video</button>
     <div id="vb"><iframe id="vf" title="Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><a id="vl" target="_blank" rel="noopener">Abrir en YouTube</a></div>
     <a id="cdbtn" class="apk" href="https://cd-trckas-plataforma.vercel.app/" target="_blank" rel="noopener" style="align-self:center;text-align:center">Obtener el CD completo desde aquí</a>
@@ -156,7 +162,7 @@ $("sk").addEventListener("input", () => { drag = true; $("t1").textContent = fmt
 $("sk").addEventListener("change", () => { if (a.duration) a.currentTime = $("sk").value / 1000 * a.duration; drag = false; });
 // Solo escucha: sin enlaces ni botón de descarga, sin menú contextual en portadas/reproductor.
 document.addEventListener("contextmenu", e => { if (e.target.closest("#pv,.card,#mini")) e.preventDefault(); });
-document.addEventListener("keydown", e => { if (e.code === "Space" && $("pv").classList.contains("show") && e.target.tagName !== "BUTTON") { e.preventDefault(); toggle(); } });
+document.addEventListener("keydown", e => { if (e.code === "Space" && $("pv").classList.contains("show") && e.target.tagName !== "BUTTON" && e.target.tagName !== "A") { e.preventDefault(); toggle(); } });
 function closeVideo() { $("vb").classList.remove("show"); $("vf").src = "about:blank"; $("vd").textContent = "▶ Ver video"; }
 $("vd").onclick = () => {
   if ($("vb").classList.contains("show")) { closeVideo(); return; }
