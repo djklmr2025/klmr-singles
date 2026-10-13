@@ -59,6 +59,7 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
 .mu{color:var(--mu);text-align:center}.msg{color:#ff8a8a;text-align:center;min-height:1.2em}.frm hr{border:0;border-top:1px solid #ffffff22;width:100%}.frm label{font-size:13px}
 .lyrics{background:var(--card);border:1px solid #38e8ff44;border-radius:14px;padding:18px}.lyrics h3{margin-bottom:12px}.lyrics pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;line-height:1.7}.lyrics small{display:block;color:var(--mu);margin-bottom:12px}.lyrics details{margin-top:14px}.lyrics summary{cursor:pointer;color:var(--cy)}
 .frm label input,.frm textarea{display:block;width:100%;margin-top:6px}.frm textarea{background:var(--card);color:var(--tx);border:1px solid #38e8ff55;border-radius:8px;padding:12px;font:inherit}.reactions{display:flex;gap:8px;margin-bottom:14px}.reactions button{padding:10px;border:1px solid var(--cy);border-radius:10px;background:var(--card);color:var(--tx);cursor:pointer}.reactions button[aria-pressed="true"]{background:var(--cy);color:var(--bg)}button:disabled{opacity:.5;cursor:not-allowed}#comments-list{list-style:none;padding:0}#comments-list li{border-top:1px solid #ffffff22;padding:14px 0}#comments-list p{white-space:pre-wrap;overflow-wrap:anywhere}#community-status{color:var(--go);margin-top:12px}
+#albums{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;padding:14px}#albums button{padding:12px 18px;border-radius:99px;border:1px solid var(--cy);background:var(--card);color:var(--tx);cursor:pointer}#albums button[aria-pressed="true"]{background:var(--cy);color:var(--bg)}.card[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -71,6 +72,7 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
   </div>
   <div id="apkbox"><a class="apk" href="https://github.com/djklmr2025/klmr-singles-app/raw/main/dist/KLMR-Singles.apk" rel="noopener">⬇ Descargar app para Android</a><small>Versión 1.0 · Android 5.0 o superior · APK directo (no está en Play Store)</small></div>
 </header>
+<nav id="albums" aria-label="Seleccionar CD"><button type="button" data-cd="all" aria-pressed="true">Álbum completo · 28</button><button type="button" data-cd="man" aria-pressed="false">CD MAN · 14</button><button type="button" data-cd="girl" aria-pressed="false">CD GIRL · 14</button></nav>
 <main id="grid" aria-label="Singles"></main>
 <footer>Solo escucha en línea · © KLMR · Todos los derechos reservados<p id="visits" aria-live="polite">Cargando contador de visitas…</p></footer>
 
@@ -123,6 +125,17 @@ const T = [
 ["Un Solo Latido V2",""],["Un Solo Latido",""],["Una sola cuerda",""],["Vamos a vivir",""],["Ya no vivo aquí",""],
 ["LA infiel, siempre fui yo",""],["La culpa no era mía",""],["No es mi culpa, es toda tuya",""],["Yo fui quien falló",""]];
 // Singles que tienen video en YouTube (número de pista -> ID del video)
+const CD_MAN = [1,3,6,8,10,11,13,16,17,18,19,21,22,27];
+const CD_GIRL = [2,4,5,7,9,12,14,15,20,23,24,25,26,28];
+LYRICS[3].instrumental = true;
+let selectedCD = "all";
+function albumTracks() { return selectedCD === "man" ? CD_MAN : selectedCD === "girl" ? CD_GIRL : T.map((_,i)=>i+1); }
+document.getElementById("albums").addEventListener("click", e => {
+ const button = e.target.closest("button[data-cd]"); if (!button) return;
+ selectedCD = button.dataset.cd;
+ document.querySelectorAll("#albums button").forEach(b=>b.setAttribute("aria-pressed",String(b===button)));
+ document.querySelectorAll(".card").forEach(c=>{c.hidden = !albumTracks().includes(Number(c.dataset.n));});
+});
 const V = {9:"VHytGF4Alvs",11:"HUKOy-Qy_no",15:"yIhw58dVYsk",16:"EIHrIGpwTUE",18:"XyXfo4HIeP8",19:"psmn4o-PfTE"};
 const $ = id => document.getElementById(id), pad = n => String(n).padStart(2, "0");
 const a = new Audio(); a.preload = "none";
@@ -163,7 +176,7 @@ function route() {
   } else { $("pv").classList.remove("show"); document.body.style.overflow = ""; document.title = "KLMR · Singles — CD TRCKAS"; }
   $("mini").classList.toggle("show", cur > 0 && !$("pv").classList.contains("show"));
 }
-function step(d) { go(((cur - 1 + d + T.length) % T.length) + 1, true); }
+function step(d) { const tracks = albumTracks(), i = tracks.indexOf(cur); go(i < 0 ? (d > 0 ? tracks[0] : tracks[tracks.length-1]) : tracks[(i + d + tracks.length) % tracks.length], true); }
 function toggle() { if (!cur) return; a.paused ? a.play().catch(() => { $("msg").textContent = "No se pudo reproducir el audio."; }) : a.pause(); }
 
 $("pp").onclick = toggle; $("mp").onclick = e => { e.stopPropagation(); toggle(); };
