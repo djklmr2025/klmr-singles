@@ -66,6 +66,7 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
 .album-chips a:hover,.album-chips a:focus-visible{color:var(--cy);border-color:var(--cy);outline:2px solid var(--cy);outline-offset:3px}
 #album-side-return{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:9;writing-mode:vertical-rl;display:flex;align-items:center;justify-content:center;min-height:260px;padding:18px 12px;background:linear-gradient(180deg,var(--cy),var(--pk));color:var(--bg);font-weight:800;font-size:13px;text-decoration:none;border-radius:16px 0 0 16px;box-shadow:0 5px 25px #0008;border:1px solid #ffffff55}#album-side-return:hover{filter:brightness(1.15)}#album-side-return:focus-visible{outline:3px solid var(--go);outline-offset:2px}body.has-album-return #track-library{padding-right:48px}body.has-album-return #pv .wrap{padding-right:56px}@media(max-width:480px){#album-side-return{min-height:220px;padding:12px 8px;font-size:11px}body.has-album-return #track-library{padding-right:34px}body.has-album-return #pv .wrap{padding-right:44px}}
 #apkbox .apk{display:inline-flex;align-items:center;justify-content:center;padding:10px;border-radius:50%;background:#3ddc84;color:#073521;width:50px;height:50px}
+.full-format-link{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:99px;border:1px solid var(--cy);background:var(--card);color:var(--tx);font-size:13.3333px;font-weight:400;text-decoration:none;text-align:center;cursor:pointer}.full-format-link:hover,.full-format-link:focus-visible{border-color:var(--cy);outline:2px solid var(--go);outline-offset:2px}
 </style>
 </head>
 <body>
@@ -73,7 +74,7 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
   <h1>KLMR · SINGLES</h1>
   <p>CD TRCKAS · 28 canciones · toca una portada para escucharla completa</p>
   <div style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-    <a class="btn-cd" href="#/album" aria-label="Ver video e información del Full Album CD Only Track">💿 Full Album CD Only Track · video y descarga</a>
+    <a class="full-format-link" href="#/album" aria-label="O escúchalo en el formato Full Tracks: video del álbum">O escúchalo en el formato Full Tracks</a>
   </div>
   <div id="apkbox"><a class="apk" href="https://github.com/djklmr2025/klmr-singles-app/raw/main/dist/KLMR-Singles.apk" rel="noopener" aria-label="Descargar APK para Android" title="Descargar APK para Android"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true"><path d="M17.6 9.48 19.44 6.3a.4.4 0 0 0-.69-.4l-1.88 3.25a11.4 11.4 0 0 0-9.74 0L5.25 5.9a.4.4 0 0 0-.69.4L6.4 9.48A9.18 9.18 0 0 0 2 17h20a9.18 9.18 0 0 0-4.4-7.52ZM7.5 14.25a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Zm9 0a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"/></svg></a></div>
 </header>
