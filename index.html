@@ -62,6 +62,7 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
 #albums{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;padding:14px}#albums button{padding:12px 18px;border-radius:99px;border:1px solid var(--cy);background:var(--card);color:var(--tx);cursor:pointer}#albums button[aria-pressed="true"]{background:var(--cy);color:var(--bg)}.card[hidden]{display:none}
 #albums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:700px;margin:0 auto;padding:20px 16px;gap:16px}#albums .album-card{position:relative;padding:0;overflow:hidden;border-radius:20px;background:var(--card);border:2px solid #ffffff22;box-shadow:0 12px 35px #0008;text-align:left;transition:transform .2s,border-color .2s}#albums .album-card img{display:block;width:100%;height:auto;aspect-ratio:2/3;object-fit:cover}#albums .album-card span{position:absolute;left:0;right:0;bottom:0;padding:30px 16px 16px;background:linear-gradient(transparent,#07060ff5);color:var(--tx);font-weight:700}#albums .album-card b{display:block;font-size:13px;margin-top:5px;color:var(--cy)}#albums .album-card[data-cd="girl"] b{color:var(--pk)}#albums .album-card:hover{transform:translateY(-4px)}#albums .album-card[aria-pressed="true"]{border-color:var(--cy)}#albums .album-card[data-cd="girl"][aria-pressed="true"]{border-color:var(--pk)}#albums .all-album{grid-column:1/-1;justify-self:center}.album-heading{text-align:center;padding:12px 16px;color:var(--tx);font-size:22px}@media(max-width:420px){#albums{gap:10px}#albums .album-card span{font-size:13px;padding:24px 10px 12px}}@media(prefers-reduced-motion:reduce){#albums .album-card{transition:none}}
 [hidden]{display:none!important}#album-home{display:block;margin:12px auto;background:var(--card);color:var(--tx);border:1px solid var(--cy);padding:10px 18px;border-radius:99px;cursor:pointer}
+.album-presentation{position:fixed;inset:0;z-index:8;overflow:auto;background:radial-gradient(ellipse at top left,#183f5a66,transparent 55%),radial-gradient(ellipse at top right,#5b164466,transparent 55%),var(--bg)}.album-content{max-width:960px;margin:auto;padding:28px 22px 60px}.album-return{display:inline-block;color:var(--tx);text-decoration:none;padding:10px 16px;border:1px solid #ffffff33;border-radius:99px;margin-bottom:32px}.album-kicker{color:var(--cy);letter-spacing:.2em;font-weight:700;font-size:13px}.album-content h2{font-size:clamp(36px,7vw,66px);line-height:1.08;margin:14px 0}.album-content h2 span{color:var(--pk)}.album-intro{max-width:680px;color:var(--mu);line-height:1.7;font-size:17px}.album-chips{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}.album-chips span{padding:8px 14px;background:#ffffff0b;border:1px solid #ffffff22;border-radius:99px;font-size:13px}.album-video{aspect-ratio:16/9;border-radius:20px;overflow:hidden;border:1px solid #38e8ff55;box-shadow:0 15px 50px #0008;background:#000}.album-video iframe{width:100%;height:100%;border:0}.album-youtube{display:inline-block;color:var(--cy);margin:16px 0 24px}.album-about,.album-download{padding:24px;background:#ffffff08;border:1px solid #ffffff15;border-radius:18px;margin-top:18px}.album-about h3,.album-download h3{margin-bottom:12px}.album-about p,.album-download p{color:var(--mu);line-height:1.7}.album-about details{margin-top:18px}.album-about summary{cursor:pointer;color:var(--cy)}#full-album-tracklist{padding-left:24px;line-height:1.8;margin-top:14px}.album-download{text-align:center}.album-download .btn-cd{margin:20px 0}.album-download small{display:block;color:var(--mu);font-size:12px;line-height:1.6}
 </style>
 </head>
 <body>
@@ -70,7 +71,7 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
   <p>CD TRCKAS · 28 canciones · toca una portada para escucharla completa</p>
   <div style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
     <a class="btn-cd" href="https://cd-trckas-plataforma.vercel.app/" target="_blank" rel="noopener">💿 Obtener el CD completo desde aquí</a>
-    <a class="btn-cd" href="https://drive.google.com/drive/folders/1Ebh8stBa6TOocUmsiOkhzpmO-mY7OHiO?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Descarga el Full Album CD Only Track desde Google Drive">⬇ Descarga el Full Album CD Only Track</a>
+    <a class="btn-cd" href="#/album" aria-label="Ver video e información del Full Album CD Only Track">💿 Full Album CD Only Track · video y descarga</a>
   </div>
   <div id="apkbox"><a class="apk" href="https://github.com/djklmr2025/klmr-singles-app/raw/main/dist/KLMR-Singles.apk" rel="noopener">⬇ Descargar app para Android</a><small>Versión 1.0 · Android 5.0 o superior · APK directo (no está en Play Store)</small></div>
 </header>
@@ -119,6 +120,20 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
   </div>
 </section>
 
+
+<section id="full-album" class="album-presentation" hidden aria-label="Full Album CD Only Track">
+ <div class="album-content">
+  <a class="album-return" href="#">← Volver a KLMR Singles</a>
+  <p class="album-kicker">KLMR · CD TRCKAS</p>
+  <h2>Full Album<br><span>CD Only Track</span></h2>
+  <p class="album-intro">Un álbum, dos universos: MAN y GIRL. Disfruta las 28 pistas y sus distintas bases, voces e instrumentales en una experiencia completa.</p>
+  <div class="album-chips"><span>28 pistas</span><span>MAN · 14 pistas</span><span>GIRL · 14 pistas</span></div>
+  <div class="album-video"><iframe id="full-album-video" title="KLMR · Full Album CD Only Track" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+  <a class="album-youtube" href="https://www.youtube.com/watch?v=vR3pjw44lkg" target="_blank" rel="noopener noreferrer">▶ Ver el álbum directamente en YouTube</a>
+  <div class="album-about"><h3>Acerca de la música</h3><p>Creado por KLMR. Versiones que comparten letra y exploran distintas bases y voces, junto con piezas instrumentales. Incluye canciones en español, inglés, francés, japonés y coreano.</p><details><summary>Ver las 28 pistas del álbum</summary><ol id="full-album-tracklist"></ol></details></div>
+  <div class="album-download"><h3>Llévate el álbum completo</h3><p>Descarga los archivos de audio juntos en un ZIP y extráelos para escucharlos en tu reproductor.</p><a class="btn-cd" href="https://arkaios.qzz.io/s/sVsf_hs" target="_blank" rel="noopener noreferrer">⬇ Descargar Full Album · ZIP</a><small>ZIP · aproximadamente 312 MB. Google Drive puede pedir que pulses «Descargar de todos modos».</small></div>
+ </div>
+</section>
 <script>
 // Audio completo ya publicado en la plataforma (MP3 01..28). Si pones esta carpeta
 // dentro del mismo proyecto de Vercel, cambia AUDIO_BASE a "/audio/".
@@ -204,6 +219,15 @@ function load(n) {
   }
 }
 function route() {
+  const albumOpen = location.hash === "#/album";
+  $("full-album").hidden = !albumOpen;
+  if (albumOpen) {
+    a.pause(); closeVideo();
+    if (!$("full-album-video").getAttribute("src")) $("full-album-video").src = "https://www.youtube-nocookie.com/embed/vR3pjw44lkg?rel=0&playsinline=1";
+    $("pv").classList.remove("show"); $("mini").classList.remove("show");
+    document.body.style.overflow = "hidden"; document.title = "Full Album CD Only Track · KLMR"; want = false; return;
+  }
+  $("full-album-video").removeAttribute("src");
   const m = location.hash.match(/^#\/(\d+)$/), n = m ? +m[1] : 0;
   if (n >= 1 && n <= T.length) {
     if (n !== cur) load(n);
@@ -239,6 +263,7 @@ $("vd").onclick = () => {
 a.addEventListener("play", () => { if ($("vb").classList.contains("show")) closeVideo(); });
 // El botón de la app no se muestra dentro de la propia app (WebView) ni en iPhone/iPad.
 if (/; wv\)|iPhone|iPad/.test(navigator.userAgent)) $("apkbox").hidden = true;
+$("full-album-tracklist").replaceChildren(...T.map(t => { const li = document.createElement("li"); li.textContent = t[0] + (t[1] ? " — " + t[1] : ""); return li; }));
 addEventListener("hashchange", route); route();
 </script>
 <section id="dl" aria-label="Descargas Premium">
