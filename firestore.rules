@@ -29,5 +29,10 @@ service cloud.firestore {
       allow read: if verified()
         && get(/databases/$(database)/documents/entitlements/$(request.auth.uid)).data.active == true;
     }
+    // Comunidad: escrituras solo desde funciones que exigen correo verificado.
+    match /tracks/{track}/comments/{comment} { allow read: if true; }
+    match /tracks/{track}/reactions/{uid} { allow get: if verified() && request.auth.uid == uid; }
+    match /trackStats/{track} { allow read: if true; }
+    match /siteStats/public { allow read: if true; }
   }
 }
