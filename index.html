@@ -65,6 +65,7 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
 .album-presentation{position:fixed;inset:0;z-index:8;overflow:auto;background:radial-gradient(ellipse at top left,#183f5a66,transparent 55%),radial-gradient(ellipse at top right,#5b164466,transparent 55%),var(--bg)}.album-content{max-width:960px;margin:auto;padding:28px 22px 60px}.album-return{display:inline-block;color:var(--tx);text-decoration:none;padding:10px 16px;border:1px solid #ffffff33;border-radius:99px;margin-bottom:32px}.album-kicker{color:var(--cy);letter-spacing:.2em;font-weight:700;font-size:13px}.album-content h2{font-size:clamp(36px,7vw,66px);line-height:1.08;margin:14px 0}.album-content h2 span{color:var(--pk)}.album-intro{max-width:680px;color:var(--mu);line-height:1.7;font-size:17px}.album-chips{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}.album-chips a{color:var(--tx);text-decoration:none;padding:8px 14px;background:#ffffff0b;border:1px solid #ffffff22;border-radius:99px;font-size:13px}.album-video{aspect-ratio:16/9;border-radius:20px;overflow:hidden;border:1px solid #38e8ff55;box-shadow:0 15px 50px #0008;background:#000}.album-video iframe{width:100%;height:100%;border:0}.album-youtube{display:inline-block;color:var(--cy);margin:16px 0 24px}.album-about,.album-download{padding:24px;background:#ffffff08;border:1px solid #ffffff15;border-radius:18px;margin-top:18px}.album-about h3,.album-download h3{margin-bottom:12px}.album-about p,.album-download p{color:var(--mu);line-height:1.7}.album-about details{margin-top:18px}.album-about summary{cursor:pointer;color:var(--cy)}#full-album-tracklist{padding-left:24px;line-height:1.8;margin-top:14px}.album-download{text-align:center}.album-download .btn-cd{margin:20px 0}.album-download small{display:block;color:var(--mu);font-size:12px;line-height:1.6}
 .album-chips a:hover,.album-chips a:focus-visible{color:var(--cy);border-color:var(--cy);outline:2px solid var(--cy);outline-offset:3px}
 #album-side-return{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:9;writing-mode:vertical-rl;display:flex;align-items:center;justify-content:center;min-height:260px;padding:18px 12px;background:linear-gradient(180deg,var(--cy),var(--pk));color:var(--bg);font-weight:800;font-size:13px;text-decoration:none;border-radius:16px 0 0 16px;box-shadow:0 5px 25px #0008;border:1px solid #ffffff55}#album-side-return:hover{filter:brightness(1.15)}#album-side-return:focus-visible{outline:3px solid var(--go);outline-offset:2px}body.has-album-return #track-library{padding-right:48px}body.has-album-return #pv .wrap{padding-right:56px}@media(max-width:480px){#album-side-return{min-height:220px;padding:12px 8px;font-size:11px}body.has-album-return #track-library{padding-right:34px}body.has-album-return #pv .wrap{padding-right:44px}}
+#apkbox .apk{display:inline-flex;align-items:center;justify-content:center;padding:10px;border-radius:50%;background:#3ddc84;color:#073521;width:50px;height:50px}
 </style>
 </head>
 <body>
@@ -72,10 +73,9 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
   <h1>KLMR · SINGLES</h1>
   <p>CD TRCKAS · 28 canciones · toca una portada para escucharla completa</p>
   <div style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-    <a class="btn-cd" href="https://cd-trckas-plataforma.vercel.app/" target="_blank" rel="noopener">💿 Obtener el CD completo desde aquí</a>
     <a class="btn-cd" href="#/album" aria-label="Ver video e información del Full Album CD Only Track">💿 Full Album CD Only Track · video y descarga</a>
   </div>
-  <div id="apkbox"><a class="apk" href="https://github.com/djklmr2025/klmr-singles-app/raw/main/dist/KLMR-Singles.apk" rel="noopener">⬇ Descargar app para Android</a><small>Versión 1.0 · Android 5.0 o superior · APK directo (no está en Play Store)</small></div>
+  <div id="apkbox"><a class="apk" href="https://github.com/djklmr2025/klmr-singles-app/raw/main/dist/KLMR-Singles.apk" rel="noopener" aria-label="Descargar APK para Android" title="Descargar APK para Android"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true"><path d="M17.6 9.48 19.44 6.3a.4.4 0 0 0-.69-.4l-1.88 3.25a11.4 11.4 0 0 0-9.74 0L5.25 5.9a.4.4 0 0 0-.69.4L6.4 9.48A9.18 9.18 0 0 0 2 17h20a9.18 9.18 0 0 0-4.4-7.52ZM7.5 14.25a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Zm9 0a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"/></svg></a></div>
 </header>
 <nav id="albums" aria-label="Elegir disco">
   <button type="button" class="album-card" data-cd="man" aria-pressed="false" aria-label="Entrar al CD MAN, 14 pistas"><img src="covers/cd-man.jpg" alt="DJ del CD MAN con iluminación azul neón" width="1024" height="1536"><span>CD MAN · 14 pistas <b>Entrar al disco →</b></span></button>
@@ -85,6 +85,7 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
 <section id="track-library" hidden aria-label="Pistas del álbum"><button id="album-home" type="button">← Elegir otro formato</button>
 <h2 id="album-heading" class="album-heading" aria-live="polite">Álbum completo · 28 pistas</h2>
 <main id="grid" aria-label="Singles"></main>
+<div id="full-tracks-cd" hidden style="text-align:center;padding:12px 16px 32px"><a class="btn-cd" href="https://cd-trckas-plataforma.vercel.app/" target="_blank" rel="noopener">💿 Obtener el CD completo desde aquí</a></div>
 </section>
 <footer>Solo escucha en línea · © KLMR · Todos los derechos reservados<p id="visits" aria-live="polite">Cargando contador de visitas…</p></footer>
 
@@ -104,7 +105,6 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
       <button id="pp" aria-label="Reproducir o pausar">▶</button>
       <button id="nx" aria-label="Siguiente">⏭</button>
     </div>
-    <a id="cdbtn" class="btn-cd" href="https://cd-trckas-plataforma.vercel.app/" target="_blank" rel="noopener">💿 Obtener el CD completo desde aquí</a>
     <button id="vd" hidden>▶ Ver video</button>
     <div id="vb"><iframe id="vf" title="Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><a id="vl" target="_blank" rel="noopener">Abrir en YouTube</a></div>
     <p id="msg" role="status" aria-live="polite"></p>
@@ -175,6 +175,7 @@ function albumTracks() { return selectedCD === "man" ? CD_MAN : selectedCD === "
 document.getElementById("albums").addEventListener("click", e => {
  const button = e.target.closest("button[data-cd]"); if (!button) return;
  selectedCD = button.dataset.cd;
+ document.getElementById("full-tracks-cd").hidden = selectedCD !== "all";
  document.getElementById("album-side-return").hidden = false; document.body.classList.add("has-album-return");
  document.getElementById("track-library").hidden = false;
  document.getElementById("albums").hidden = true;
