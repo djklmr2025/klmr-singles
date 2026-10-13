@@ -135,6 +135,21 @@ const CD_MAN = [1,3,6,8,10,11,13,16,17,18,19,21,22,27];
 const CD_GIRL = [2,4,5,7,9,12,14,15,20,23,24,25,26,28];
 LYRICS[3].instrumental = true;
 let selectedCD = "all";
+function discInfo(n) { const man = CD_MAN.includes(n), tracks = man ? CD_MAN : CD_GIRL; return { name: man ? "MAN" : "GIRL", number: tracks.indexOf(n)+1 }; }
+function visibleNumber(n) { return selectedCD === "all" ? n : discInfo(n).number; }
+function refreshTrackNumbers() {
+ document.querySelectorAll(".card").forEach(c => {
+  const n = Number(c.dataset.n), info = discInfo(n);
+  c.querySelector("span").textContent = pad(visibleNumber(n));
+  c.setAttribute("aria-label", "Escuchar " + (selectedCD === "all" ? pad(n) : "CD " + info.name + ", pista " + pad(info.number)) + " " + T[n-1][0]);
+ });
+ if (cur) updatePlayingNumber(cur);
+}
+function updatePlayingNumber(n) {
+ const info = discInfo(n), t = T[n-1];
+ $("st").textContent = "CD " + info.name + " · Pista " + pad(info.number) + " de 14" + (t[1] ? " · " + t[1] : "");
+ $("mt").textContent = "CD " + info.name + " · " + pad(info.number) + " · " + t[0] + (t[1] ? " — " + t[1] : "");
+}
 function albumTracks() { return selectedCD === "man" ? CD_MAN : selectedCD === "girl" ? CD_GIRL : T.map((_,i)=>i+1); }
 document.getElementById("albums").addEventListener("click", e => {
  const button = e.target.closest("button[data-cd]"); if (!button) return;
@@ -142,6 +157,7 @@ document.getElementById("albums").addEventListener("click", e => {
  document.getElementById("album-heading").textContent = selectedCD === "man" ? "CD MAN · 14 pistas" : selectedCD === "girl" ? "CD GIRL · 14 pistas" : "Álbum completo · 28 pistas";
  document.querySelectorAll("#albums button").forEach(b=>b.setAttribute("aria-pressed",String(b===button)));
  document.querySelectorAll(".card").forEach(c=>{c.hidden = !albumTracks().includes(Number(c.dataset.n));});
+ refreshTrackNumbers();
  document.getElementById("album-heading").scrollIntoView({block:"start"});
 });
 const V = {9:"VHytGF4Alvs",11:"HUKOy-Qy_no",15:"yIhw58dVYsk",16:"EIHrIGpwTUE",18:"XyXfo4HIeP8",19:"psmn4o-PfTE"};
@@ -164,6 +180,7 @@ function load(n) {
   $("tt").textContent = t[0]; $("st").textContent = t[1] || "KLMR · CD TRCKAS";
   $("cv").src = img; $("bg").style.backgroundImage = `url(${img})`;
   $("mi").src = img; $("mt").textContent = pad(n) + " · " + t[0] + (t[1] ? " — " + t[1] : "");
+  updatePlayingNumber(n);
   $("msg").textContent = ""; $("sk").value = 0;
   $("vb").classList.remove("show"); $("vf").src = "about:blank"; $("vd").textContent = "▶ Ver video";
   $("vd").hidden = !V[n]; $("vl").href = V[n] ? "https://www.youtube.com/watch?v=" + V[n] : "#"; $("t1").textContent = "0:00"; $("t2").textContent = "0:00";
