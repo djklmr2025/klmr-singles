@@ -58,6 +58,7 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
 .frm button.alt {background:#ffffff1a;color:var(--tx);border:0}
 .mu{color:var(--mu);text-align:center}.msg{color:#ff8a8a;text-align:center;min-height:1.2em}.frm hr{border:0;border-top:1px solid #ffffff22;width:100%}.frm label{font-size:13px}
 .lyrics{background:var(--card);border:1px solid #38e8ff44;border-radius:14px;padding:18px}.lyrics h3{margin-bottom:12px}.lyrics pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;line-height:1.7}.lyrics small{display:block;color:var(--mu);margin-bottom:12px}.lyrics details{margin-top:14px}.lyrics summary{cursor:pointer;color:var(--cy)}
+.frm label input,.frm textarea{display:block;width:100%;margin-top:6px}.frm textarea{background:var(--card);color:var(--tx);border:1px solid #38e8ff55;border-radius:8px;padding:12px;font:inherit}.reactions{display:flex;gap:8px;margin-bottom:14px}.reactions button{padding:10px;border:1px solid var(--cy);border-radius:10px;background:var(--card);color:var(--tx);cursor:pointer}.reactions button[aria-pressed="true"]{background:var(--cy);color:var(--bg)}button:disabled{opacity:.5;cursor:not-allowed}#comments-list{list-style:none;padding:0}#comments-list li{border-top:1px solid #ffffff22;padding:14px 0}#comments-list p{white-space:pre-wrap;overflow-wrap:anywhere}#community-status{color:var(--go);margin-top:12px}
 </style>
 </head>
 <body>
@@ -71,7 +72,7 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
   <div id="apkbox"><a class="apk" href="https://github.com/djklmr2025/klmr-singles-app/raw/main/dist/KLMR-Singles.apk" rel="noopener">⬇ Descargar app para Android</a><small>Versión 1.0 · Android 5.0 o superior · APK directo (no está en Play Store)</small></div>
 </header>
 <main id="grid" aria-label="Singles"></main>
-<footer>Solo escucha en línea · © KLMR · Todos los derechos reservados</footer>
+<footer>Solo escucha en línea · © KLMR · Todos los derechos reservados<p id="visits" aria-live="polite">Cargando contador de visitas…</p></footer>
 
 <div id="mini"><img id="mi" alt=""><b id="mt"></b><button id="mp" aria-label="Reproducir o pausar">▶</button></div>
 
@@ -92,6 +93,17 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
     <button id="vd" hidden>▶ Ver video</button>
     <div id="vb"><iframe id="vf" title="Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><a id="vl" target="_blank" rel="noopener">Abrir en YouTube</a></div>
     <p id="msg" role="status" aria-live="polite"></p>
+
+    <section id="community" class="lyrics" aria-label="Comunidad de esta pista">
+      <h3>¿Qué te pareció esta pista?</h3>
+      <div class="reactions"><button id="like" type="button" disabled aria-pressed="false">👍 Me gusta <span id="like-count">—</span></button><button id="dislike" type="button" disabled aria-pressed="false">👎 No me gusta <span id="dislike-count">—</span></button></div>
+      <p id="account-state">Regístrate o inicia sesión para comentar y votar.</p>
+      <form id="account-form" class="frm"><label>Correo<input id="account-email" type="email" required autocomplete="email"></label><label>Contraseña<input id="account-password" type="password" required minlength="8" autocomplete="current-password"></label><button type="submit" data-mode="login">Iniciar sesión</button><button type="submit" data-mode="register">Crear cuenta</button><button id="account-reset" type="button" class="alt">Olvidé mi contraseña</button><small>Tu correo se usa para acceder y verificar tu cuenta. Los comentarios y el apodo elegido serán públicos.</small></form>
+      <div class="frm"><button id="account-refresh" type="button" hidden>Ya verifiqué mi correo</button><button id="account-resend" type="button" hidden>Reenviar verificación</button><button id="account-logout" type="button" hidden>Cerrar sesión</button></div>
+      <h3>Comentarios de esta pista</h3>
+      <form id="comment-form" class="frm"><label>Apodo público<input id="comment-name" required minlength="2" maxlength="30" autocomplete="nickname"></label><label>Comentario<textarea id="comment-text" required minlength="2" maxlength="1000" rows="4"></textarea></label><button id="comment-send" type="submit" disabled>Publicar comentario</button></form>
+      <p id="community-status" role="status" aria-live="polite"></p><p id="comments-empty">Los comentarios estarán disponibles al activar la comunidad.</p><ul id="comments-list"></ul>
+    </section>
     <section id="lyrics" class="lyrics" aria-label="Letra de la canción"><h3>Letra</h3><small id="lyrics-note"></small><pre id="lyrics-text"></pre></section>
   </div>
 </section>
@@ -251,5 +263,6 @@ document.getElementById("dl-back").onclick = () => { location.hash = ""; };
 if (auth) onAuthStateChanged(auth, () => { if (dl.classList.contains("show")) gate(); });
 addEventListener("hashchange", route); route();
 </script>
+<script type="module" src="community.js"></script>
 </body>
 </html>
