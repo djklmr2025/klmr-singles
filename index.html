@@ -64,6 +64,7 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
 [hidden]{display:none!important}#album-home{display:block;margin:12px auto;background:var(--card);color:var(--tx);border:1px solid var(--cy);padding:10px 18px;border-radius:99px;cursor:pointer}
 .album-presentation{position:fixed;inset:0;z-index:8;overflow:auto;background:radial-gradient(ellipse at top left,#183f5a66,transparent 55%),radial-gradient(ellipse at top right,#5b164466,transparent 55%),var(--bg)}.album-content{max-width:960px;margin:auto;padding:28px 22px 60px}.album-return{display:inline-block;color:var(--tx);text-decoration:none;padding:10px 16px;border:1px solid #ffffff33;border-radius:99px;margin-bottom:32px}.album-kicker{color:var(--cy);letter-spacing:.2em;font-weight:700;font-size:13px}.album-content h2{font-size:clamp(36px,7vw,66px);line-height:1.08;margin:14px 0}.album-content h2 span{color:var(--pk)}.album-intro{max-width:680px;color:var(--mu);line-height:1.7;font-size:17px}.album-chips{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}.album-chips a{color:var(--tx);text-decoration:none;padding:8px 14px;background:#ffffff0b;border:1px solid #ffffff22;border-radius:99px;font-size:13px}.album-video{aspect-ratio:16/9;border-radius:20px;overflow:hidden;border:1px solid #38e8ff55;box-shadow:0 15px 50px #0008;background:#000}.album-video iframe{width:100%;height:100%;border:0}.album-youtube{display:inline-block;color:var(--cy);margin:16px 0 24px}.album-about,.album-download{padding:24px;background:#ffffff08;border:1px solid #ffffff15;border-radius:18px;margin-top:18px}.album-about h3,.album-download h3{margin-bottom:12px}.album-about p,.album-download p{color:var(--mu);line-height:1.7}.album-about details{margin-top:18px}.album-about summary{cursor:pointer;color:var(--cy)}#full-album-tracklist{padding-left:24px;line-height:1.8;margin-top:14px}.album-download{text-align:center}.album-download .btn-cd{margin:20px 0}.album-download small{display:block;color:var(--mu);font-size:12px;line-height:1.6}
 .album-chips a:hover,.album-chips a:focus-visible{color:var(--cy);border-color:var(--cy);outline:2px solid var(--cy);outline-offset:3px}
+#album-side-return{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:9;writing-mode:vertical-rl;display:flex;align-items:center;justify-content:center;min-height:260px;padding:18px 12px;background:linear-gradient(180deg,var(--cy),var(--pk));color:var(--bg);font-weight:800;font-size:13px;text-decoration:none;border-radius:16px 0 0 16px;box-shadow:0 5px 25px #0008;border:1px solid #ffffff55}#album-side-return:hover{filter:brightness(1.15)}#album-side-return:focus-visible{outline:3px solid var(--go);outline-offset:2px}body.has-album-return #track-library{padding-right:48px}body.has-album-return #pv .wrap{padding-right:56px}@media(max-width:480px){#album-side-return{min-height:220px;padding:12px 8px;font-size:11px}body.has-album-return #track-library{padding-right:34px}body.has-album-return #pv .wrap{padding-right:44px}}
 </style>
 </head>
 <body>
@@ -87,6 +88,7 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
 </section>
 <footer>Solo escucha en línea · © KLMR · Todos los derechos reservados<p id="visits" aria-live="polite">Cargando contador de visitas…</p></footer>
 
+<a id="album-side-return" href="#/album" hidden aria-label="Regresar al Full Album Only Track">← Regresar al Full Album Only Track</a>
 <div id="mini"><img id="mi" alt=""><b id="mt"></b><button id="mp" aria-label="Reproducir o pausar">▶</button></div>
 
 <section id="pv" aria-label="Reproductor">
@@ -173,6 +175,7 @@ function albumTracks() { return selectedCD === "man" ? CD_MAN : selectedCD === "
 document.getElementById("albums").addEventListener("click", e => {
  const button = e.target.closest("button[data-cd]"); if (!button) return;
  selectedCD = button.dataset.cd;
+ document.getElementById("album-side-return").hidden = false; document.body.classList.add("has-album-return");
  document.getElementById("track-library").hidden = false;
  document.getElementById("albums").hidden = true;
  document.getElementById("album-heading").textContent = selectedCD === "man" ? "CD MAN · 14 pistas" : selectedCD === "girl" ? "CD GIRL · 14 pistas" : "Álbum completo · 28 pistas";
@@ -182,6 +185,7 @@ document.getElementById("albums").addEventListener("click", e => {
  document.getElementById("album-heading").scrollIntoView({block:"start"});
 });
 document.getElementById("album-home").onclick = () => {
+ document.getElementById("album-side-return").hidden = true; document.body.classList.remove("has-album-return");
  document.getElementById("track-library").hidden = true;
  document.getElementById("albums").hidden = false;
  document.querySelectorAll("#albums button").forEach(b=>b.setAttribute("aria-pressed","false"));
@@ -225,6 +229,7 @@ function route() {
   if (albumOpen) {
     a.pause(); closeVideo();
     if (!$("full-album-video").getAttribute("src")) $("full-album-video").src = "https://www.youtube-nocookie.com/embed/vR3pjw44lkg?rel=0&playsinline=1";
+    $("album-side-return").hidden = true; document.body.classList.remove("has-album-return");
     $("pv").classList.remove("show"); $("mini").classList.remove("show");
     document.body.style.overflow = "hidden"; document.title = "Full Album CD Only Track · KLMR"; want = false; return;
   }
@@ -241,6 +246,8 @@ function route() {
     if (want) { a.play().catch(() => {}); want = false; }
   } else { $("pv").classList.remove("show"); document.body.style.overflow = ""; document.title = "KLMR · Singles — CD TRCKAS"; }
   $("mini").classList.toggle("show", cur > 0 && !$("pv").classList.contains("show"));
+  const showAlbumReturn = !$("track-library").hidden || $("pv").classList.contains("show");
+  $("album-side-return").hidden = !showAlbumReturn; document.body.classList.toggle("has-album-return", showAlbumReturn);
 }
 function step(d) { const tracks = albumTracks(), i = tracks.indexOf(cur); go(i < 0 ? (d > 0 ? tracks[0] : tracks[tracks.length-1]) : tracks[(i + d + tracks.length) % tracks.length], true); }
 function toggle() { if (!cur) return; a.paused ? a.play().catch(() => { $("msg").textContent = "No se pudo reproducir el audio."; }) : a.pause(); }
