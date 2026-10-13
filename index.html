@@ -60,6 +60,7 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
 .lyrics{background:var(--card);border:1px solid #38e8ff44;border-radius:14px;padding:18px}.lyrics h3{margin-bottom:12px}.lyrics pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;line-height:1.7}.lyrics small{display:block;color:var(--mu);margin-bottom:12px}.lyrics details{margin-top:14px}.lyrics summary{cursor:pointer;color:var(--cy)}
 .frm label input,.frm textarea{display:block;width:100%;margin-top:6px}.frm textarea{background:var(--card);color:var(--tx);border:1px solid #38e8ff55;border-radius:8px;padding:12px;font:inherit}.reactions{display:flex;gap:8px;margin-bottom:14px}.reactions button{padding:10px;border:1px solid var(--cy);border-radius:10px;background:var(--card);color:var(--tx);cursor:pointer}.reactions button[aria-pressed="true"]{background:var(--cy);color:var(--bg)}button:disabled{opacity:.5;cursor:not-allowed}#comments-list{list-style:none;padding:0}#comments-list li{border-top:1px solid #ffffff22;padding:14px 0}#comments-list p{white-space:pre-wrap;overflow-wrap:anywhere}#community-status{color:var(--go);margin-top:12px}
 #albums{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;padding:14px}#albums button{padding:12px 18px;border-radius:99px;border:1px solid var(--cy);background:var(--card);color:var(--tx);cursor:pointer}#albums button[aria-pressed="true"]{background:var(--cy);color:var(--bg)}.card[hidden]{display:none}
+#albums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:700px;margin:0 auto;padding:20px 16px;gap:16px}#albums .album-card{position:relative;padding:0;overflow:hidden;border-radius:20px;background:var(--card);border:2px solid #ffffff22;box-shadow:0 12px 35px #0008;text-align:left;transition:transform .2s,border-color .2s}#albums .album-card img{display:block;width:100%;height:auto;aspect-ratio:2/3;object-fit:cover}#albums .album-card span{position:absolute;left:0;right:0;bottom:0;padding:30px 16px 16px;background:linear-gradient(transparent,#07060ff5);color:var(--tx);font-weight:700}#albums .album-card b{display:block;font-size:13px;margin-top:5px;color:var(--cy)}#albums .album-card[data-cd="girl"] b{color:var(--pk)}#albums .album-card:hover{transform:translateY(-4px)}#albums .album-card[aria-pressed="true"]{border-color:var(--cy)}#albums .album-card[data-cd="girl"][aria-pressed="true"]{border-color:var(--pk)}#albums .all-album{grid-column:1/-1;justify-self:center}.album-heading{text-align:center;padding:12px 16px;color:var(--tx);font-size:22px}@media(max-width:420px){#albums{gap:10px}#albums .album-card span{font-size:13px;padding:24px 10px 12px}}@media(prefers-reduced-motion:reduce){#albums .album-card{transition:none}}
 </style>
 </head>
 <body>
@@ -72,7 +73,12 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
   </div>
   <div id="apkbox"><a class="apk" href="https://github.com/djklmr2025/klmr-singles-app/raw/main/dist/KLMR-Singles.apk" rel="noopener">⬇ Descargar app para Android</a><small>Versión 1.0 · Android 5.0 o superior · APK directo (no está en Play Store)</small></div>
 </header>
-<nav id="albums" aria-label="Seleccionar CD"><button type="button" data-cd="all" aria-pressed="true">Álbum completo · 28</button><button type="button" data-cd="man" aria-pressed="false">CD MAN · 14</button><button type="button" data-cd="girl" aria-pressed="false">CD GIRL · 14</button></nav>
+<nav id="albums" aria-label="Elegir disco">
+  <button type="button" class="album-card" data-cd="man" aria-pressed="false" aria-label="Entrar al CD MAN, 14 pistas"><img src="covers/cd-man.jpg" alt="DJ del CD MAN con iluminación azul neón" width="1024" height="1536"><span>CD MAN · 14 pistas <b>Entrar al disco →</b></span></button>
+  <button type="button" class="album-card" data-cd="girl" aria-pressed="false" aria-label="Entrar al CD GIRL, 14 pistas"><img src="covers/cd-girl.jpg" alt="DJ del CD GIRL con iluminación rosa neón" width="1024" height="1536"><span>CD GIRL · 14 pistas <b>Entrar al disco →</b></span></button>
+  <button type="button" class="all-album" data-cd="all" aria-pressed="true">Ver álbum completo · 28 pistas</button>
+</nav>
+<h2 id="album-heading" class="album-heading" aria-live="polite">Álbum completo · 28 pistas</h2>
 <main id="grid" aria-label="Singles"></main>
 <footer>Solo escucha en línea · © KLMR · Todos los derechos reservados<p id="visits" aria-live="polite">Cargando contador de visitas…</p></footer>
 
@@ -133,8 +139,10 @@ function albumTracks() { return selectedCD === "man" ? CD_MAN : selectedCD === "
 document.getElementById("albums").addEventListener("click", e => {
  const button = e.target.closest("button[data-cd]"); if (!button) return;
  selectedCD = button.dataset.cd;
+ document.getElementById("album-heading").textContent = selectedCD === "man" ? "CD MAN · 14 pistas" : selectedCD === "girl" ? "CD GIRL · 14 pistas" : "Álbum completo · 28 pistas";
  document.querySelectorAll("#albums button").forEach(b=>b.setAttribute("aria-pressed",String(b===button)));
  document.querySelectorAll(".card").forEach(c=>{c.hidden = !albumTracks().includes(Number(c.dataset.n));});
+ document.getElementById("album-heading").scrollIntoView({block:"start"});
 });
 const V = {9:"VHytGF4Alvs",11:"HUKOy-Qy_no",15:"yIhw58dVYsk",16:"EIHrIGpwTUE",18:"XyXfo4HIeP8",19:"psmn4o-PfTE"};
 const $ = id => document.getElementById(id), pad = n => String(n).padStart(2, "0");
