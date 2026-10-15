@@ -1,17 +1,37 @@
-// Contador externo sin Firebase. Base visual: 10,000.
-// Moe Counter incrementa y almacena visitas; si falla la red, conservar la base visible.
+// Contador real KLMR Singles. Los totales se almacenan en MongoDB.
 (() => {
   const el = document.getElementById('visits');
   if (!el) return;
-  el.textContent = '10,000 visitas';
-  const img = document.createElement('img');
-  img.alt = 'Contador de visitas de KLMR Singles';
-  img.width = 126;
-  img.height = 34;
-  img.loading = 'eager';
-  img.decoding = 'async';
-  img.style.cssText = 'display:block;margin:8px auto;max-width:90%;height:auto';
-  img.onload = () => { el.textContent = ''; el.append(img); };
-  img.onerror = () => { el.textContent = '10,000 visitas'; };
-  img.src = 'https://count.getloli.com/@klmr-singles-djklmr2025?name=klmr-singles-djklmr2025&theme=normal-1&offset=10000&padding=4&scale=1&darkmode=dark&t=' + Date.now();
+  const endpoint = 'https://cd-trckas-plataforma.vercel.app/api/visits';
+  el.textContent = 'Consultando visitas…';
+  const show = n => { el.textContent = new Intl.NumberFormat('es-MX').format(n) + ' visitas registradas'; };
+  (async () => {
+    try {
+      let visitorId;
+      try {
+        visitorId = localStorage.getItem('klmr_visit_id');
+        if (!visitorId || !/^[0-9a-f-]{36}$/.test(visitorId)) {
+          visitorId = crypto.randomUUID();
+          localStorage.setItem('klmr_visit_id', visitorId);
+        }
+      } catch { visitorId = crypto.randomUUID(); }
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({visitorId}),
+        cache: 'no-store'
+      });
+      if (!response.ok) throw new Error('Counter unavailable');
+      const data = await response.json();
+      if (!Number.isSafeInteger(data.visits) || data.visits < 0) throw new Error('Invalid total');
+      show(data.visits);
+    } catch {
+      try {
+        const response = await fetch(endpoint, {cache:'no-store'});
+        const data = await response.json();
+        if (response.ok && Number.isSafeInteger(data.visits) && data.visits >= 0) return show(data.visits);
+      } catch {}
+      el.textContent = 'Visitas no disponibles';
+    }
+  })();
 })();
