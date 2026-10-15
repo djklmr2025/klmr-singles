@@ -1,20 +1,17 @@
-// Contador público: base visual 10,000 + registros nuevos del servicio externo.
-// La sesión de la pestaña evita sumar de nuevo al recargar.
+// Contador externo sin Firebase. Base visual: 10,000.
+// Moe Counter incrementa y almacena visitas; si falla la red, conservar la base visible.
 (() => {
   const el = document.getElementById('visits');
   if (!el) return;
-  const base = 10000;
-  const endpoint = 'https://api.counterapi.dev/v1/klmr-singles-official/site-visits';
-  const key = 'klmr-counted-session-v1';
-  const show = n => { el.textContent = (base + n).toLocaleString('es-MX') + ' visitas'; };
-  const counted = (() => { try { return sessionStorage.getItem(key) === 'yes'; } catch { return false; } })();
-  fetch(endpoint + (counted ? '/' : '/up'), { cache: 'no-store' })
-    .then(r => { if (!r.ok) throw Error('Counter unavailable'); return r.json(); })
-    .then(data => {
-      const n = Number(data.count);
-      if (!Number.isSafeInteger(n) || n < 0) throw Error('Invalid counter');
-      show(n);
-      if (!counted) { try { sessionStorage.setItem(key, 'yes'); } catch {} }
-    })
-    .catch(() => { el.textContent = 'Visitas no disponibles'; });
+  el.textContent = '10,000 visitas';
+  const img = document.createElement('img');
+  img.alt = 'Contador de visitas de KLMR Singles';
+  img.width = 126;
+  img.height = 34;
+  img.loading = 'eager';
+  img.decoding = 'async';
+  img.style.cssText = 'display:block;margin:8px auto;max-width:90%;height:auto';
+  img.onload = () => { el.textContent = ''; el.append(img); };
+  img.onerror = () => { el.textContent = '10,000 visitas'; };
+  img.src = 'https://count.getloli.com/@klmr-singles-djklmr2025?name=klmr-singles-djklmr2025&theme=normal-1&offset=10000&padding=4&scale=1&darkmode=dark&t=' + Date.now();
 })();
