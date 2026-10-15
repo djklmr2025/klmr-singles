@@ -70,6 +70,7 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
 
 /* Enlaces oficiales KLMR */
 .klmr-social{display:flex;justify-content:center;align-items:center;gap:14px;margin:14px auto 4px}.klmr-social a{width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #38e8ff66;border-radius:50%;color:var(--tx);background:#14122a;transition:transform .2s,border-color .2s}.klmr-social a:hover,.klmr-social a:focus-visible{transform:translateY(-3px);border-color:var(--pk);outline:2px solid var(--cy);outline-offset:2px}.klmr-social svg{width:23px;height:23px;fill:currentColor}
+.klmr-social{display:flex;justify-content:center;gap:14px;margin:18px auto 10px}.klmr-social a{display:inline-flex;width:44px;height:44px;align-items:center;justify-content:center;border:1px solid #38e8ff88;border-radius:50%;background:#14122a;color:#38e8ff;text-decoration:none;font-size:24px;font-weight:800}.klmr-social a:hover,.klmr-social a:focus-visible{box-shadow:0 0 18px #38e8ff88;outline:2px solid #ffc94d}
 </style>
 </head>
 <body>
@@ -97,7 +98,12 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
 <main id="grid" aria-label="Singles"></main>
 <div id="full-tracks-cd" hidden style="text-align:center;padding:12px 16px 32px"><a class="btn-cd" href="https://cd-trckas-plataforma.vercel.app/" target="_blank" rel="noopener">💿 Obtener el CD completo desde aquí</a></div>
 </section>
-<footer>Solo escucha en línea · © KLMR · Todos los derechos reservados<p id="visits" aria-live="polite">Cargando contador de visitas…</p></footer>
+<footer>Solo escucha en línea · © KLMR · Todos los derechos reservados
+<nav class="klmr-social" aria-label="Redes sociales oficiales">
+<a href="https://www.tiktok.com/@djklmr2025" target="_blank" rel="noopener noreferrer" aria-label="TikTok KLMR" title="TikTok">♪</a>
+<a href="https://www.facebook.com/KLMROFFICIALCHANNEL" target="_blank" rel="noopener noreferrer" aria-label="Facebook KLMR" title="Facebook">f</a>
+<a href="https://www.youtube.com/@KLMROFFCIALCHANNEL" target="_blank" rel="noopener noreferrer" aria-label="YouTube KLMR" title="YouTube">▶</a>
+</nav><p id="visits" aria-live="polite">10,000 visitas</p></footer>
 
 <a id="album-side-return" href="#/album" hidden aria-label="Regresar al Full Album Only Track">← Regresar al Full Album Only Track</a>
 <div id="mini"><img id="mi" alt=""><b id="mt"></b><button id="mp" aria-label="Reproducir o pausar">▶</button></div>
@@ -361,6 +367,7 @@ document.getElementById("dl-back").onclick = () => { location.hash = ""; };
 if (auth) onAuthStateChanged(auth, () => { if (dl.classList.contains("show")) gate(); });
 addEventListener("hashchange", route); route();
 </script>
+<script src="visits.js" defer></script>
 <script type="module" src="community.js"></script>
 </body>
 </html>
