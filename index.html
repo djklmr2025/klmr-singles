@@ -98,6 +98,11 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
 <main id="grid" aria-label="Singles"></main>
 <div id="full-tracks-cd" hidden style="text-align:center;padding:12px 16px 32px"><a class="btn-cd" href="https://cd-trckas-plataforma.vercel.app/" target="_blank" rel="noopener">💿 Obtener el CD completo desde aquí</a></div>
 </section>
+<section id="exclusive-qr-entry" style="max-width:720px;margin:25px auto;padding:24px;border:1px solid #36dcff88;border-radius:16px;text-align:center;background:#11172a;color:#fff"><h2>💿 Modo descargas exclusivas</h2><p>Accede con tu QR, inicia sesión con Google e introduce tu código maestro.</p><a id="exclusive-access-link" href="#" aria-disabled="true" style="display:inline-block;background:#35ddff;color:#101526;padding:12px 20px;border-radius:9px;text-decoration:none;font-weight:700">🔒 Acceso exclusivo (próximamente)</a><p id="exclusive-qr" hidden></p></section>
+<script>/* Configure only after the CD-TRCKAS protected portal is deployed. Never put the master code here. */
+window.KLMR_EXCLUSIVE_PORTAL_URL = '';
+(()=>{const url=window.KLMR_EXCLUSIVE_PORTAL_URL;const a=document.getElementById('exclusive-access-link');try{const u=new URL(url);if(u.protocol!=='https:')return;a.href=u.href;a.removeAttribute('aria-disabled');a.textContent='🔒 Abrir modo exclusivo';const q=document.getElementById('exclusive-qr');q.hidden=false;q.textContent='QR exclusivo: '+u.href;}catch{}a.addEventListener('click',e=>{if(a.getAttribute('aria-disabled')==='true')e.preventDefault()})})();
+</script>
 <footer>Solo escucha en línea · © KLMR · Todos los derechos reservados
 <nav class="klmr-social" aria-label="Redes sociales oficiales">
 <a href="https://www.tiktok.com/@djklmr2025" target="_blank" rel="noopener noreferrer" aria-label="TikTok KLMR" title="TikTok">♪</a>
