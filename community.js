@@ -55,7 +55,7 @@ async function run(button, action) {
   try { await action(); } catch(e) { error(e); } finally { button.disabled = false; enabled(); }
 }
 if (!firebaseConfig.projectId || !firebaseConfig.apiKey || !firebaseConfig.appId) {
-  $('visits').textContent = 'Contador de visitas pendiente de activación';
+  // No modificar el contador público cuando Firebase social no esté configurado.
   message('Los comentarios y votos estarán disponibles cuando se active la comunidad.');
   $('account-form').hidden = true;
 } else {
@@ -93,10 +93,6 @@ if (!firebaseConfig.projectId || !firebaseConfig.apiKey || !firebaseConfig.appId
     run($(value), async () => { await react({track:n,value:next}); if (version === generation) { vote = next; paintVote(); } });
   };
   onAuthStateChanged(auth,() => { enabled(); ownVote(current,generation); });
-  onSnapshot(doc(db,'siteStats','public'), snap => { $('visits').textContent = `${(snap.data()?.visits ?? 0).toLocaleString('es-MX')} visitas registradas`; }, () => { $('visits').textContent = 'Contador temporalmente no disponible'; });
-  // Una visita por sesión de pestaña; el servidor deduplica también al recargar.
-  let id;
-  try { id = sessionStorage.getItem('klmr-visit'); if (!id) { id = crypto.randomUUID(); sessionStorage.setItem('klmr-visit',id); } } catch { id = crypto.randomUUID(); }
-  visit({id}).catch(() => { $('visits').textContent = 'No se pudo registrar esta visita'; });
+  // El contador público se gestiona independientemente en visits.js.
   addEventListener('hashchange',track); track();
 }
