@@ -50,66 +50,78 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
 #mini img{width:34px;height:60px;object-fit:cover;border-radius:6px}
 #mini b{flex:1;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #mini button{background:var(--cy);color:#07060f;border:0;border-radius:50%;width:42px;height:42px;font-size:17px;cursor:pointer}
+#dl {position:fixed;inset:0;z-index:10;background:#07060f;display:none;overflow:auto;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+#dl.show {display:block}
+.frm {display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.frm input {background:#14122a;color:var(--tx);border:1px solid #38e8ff55;padding:12px;border-radius:8px;font-size:16px}
+.frm button {background:linear-gradient(135deg,var(--cy),var(--pk));color:#07060f;border:0;padding:14px;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer}
+.frm button.alt {background:#ffffff1a;color:var(--tx);border:0}
+.mu{color:var(--mu);text-align:center}.msg{color:#ff8a8a;text-align:center;min-height:1.2em}.frm hr{border:0;border-top:1px solid #ffffff22;width:100%}.frm label{font-size:13px}
+.lyrics{background:var(--card);border:1px solid #38e8ff44;border-radius:14px;padding:18px}.lyrics h3{margin-bottom:12px}.lyrics pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;line-height:1.7}.lyrics small{display:block;color:var(--mu);margin-bottom:12px}.lyrics details{margin-top:14px}.lyrics summary{cursor:pointer;color:var(--cy)}
+.frm label input,.frm textarea{display:block;width:100%;margin-top:6px}.frm textarea{background:var(--card);color:var(--tx);border:1px solid #38e8ff55;border-radius:8px;padding:12px;font:inherit}.reactions{display:flex;gap:8px;margin-bottom:14px}.reactions button{padding:10px;border:1px solid var(--cy);border-radius:10px;background:var(--card);color:var(--tx);cursor:pointer}.reactions button[aria-pressed="true"]{background:var(--cy);color:var(--bg)}button:disabled{opacity:.5;cursor:not-allowed}#comments-list{list-style:none;padding:0}#comments-list li{border-top:1px solid #ffffff22;padding:14px 0}#comments-list p{white-space:pre-wrap;overflow-wrap:anywhere}#community-status{color:var(--go);margin-top:12px}
+#albums{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;padding:14px}#albums button{padding:12px 18px;border-radius:99px;border:1px solid var(--cy);background:var(--card);color:var(--tx);cursor:pointer}#albums button[aria-pressed="true"]{background:var(--cy);color:var(--bg)}.card[hidden]{display:none}
+#albums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:700px;margin:0 auto;padding:20px 16px;gap:16px}#albums .album-card{position:relative;padding:0;overflow:hidden;border-radius:20px;background:var(--card);border:2px solid #ffffff22;box-shadow:0 12px 35px #0008;text-align:left;transition:transform .2s,border-color .2s}#albums .album-card img{display:block;width:100%;height:auto;aspect-ratio:2/3;object-fit:cover}#albums .album-card span{position:absolute;left:0;right:0;bottom:0;padding:30px 16px 16px;background:linear-gradient(transparent,#07060ff5);color:var(--tx);font-weight:700}#albums .album-card b{display:block;font-size:13px;margin-top:5px;color:var(--cy)}#albums .album-card[data-cd="girl"] b{color:var(--pk)}#albums .album-card:hover{transform:translateY(-4px)}#albums .album-card[aria-pressed="true"]{border-color:var(--cy)}#albums .album-card[data-cd="girl"][aria-pressed="true"]{border-color:var(--pk)}#albums .all-album{grid-column:1/-1;justify-self:center}.album-heading{text-align:center;padding:12px 16px;color:var(--tx);font-size:22px}@media(max-width:420px){#albums{gap:10px}#albums .album-card span{font-size:13px;padding:24px 10px 12px}}@media(prefers-reduced-motion:reduce){#albums .album-card{transition:none}}
+[hidden]{display:none!important}#album-home{display:block;margin:12px auto;background:var(--card);color:var(--tx);border:1px solid var(--cy);padding:10px 18px;border-radius:99px;cursor:pointer}
+.album-presentation{position:fixed;inset:0;z-index:8;overflow:auto;background:radial-gradient(ellipse at top left,#183f5a66,transparent 55%),radial-gradient(ellipse at top right,#5b164466,transparent 55%),var(--bg)}.album-content{max-width:960px;margin:auto;padding:28px 22px 60px}.album-return{display:inline-block;color:var(--tx);text-decoration:none;padding:10px 16px;border:1px solid #ffffff33;border-radius:99px;margin-bottom:32px}.album-kicker{color:var(--cy);letter-spacing:.2em;font-weight:700;font-size:13px}.album-content h2{font-size:clamp(36px,7vw,66px);line-height:1.08;margin:14px 0}.album-content h2 span{color:var(--pk)}.album-intro{max-width:680px;color:var(--mu);line-height:1.7;font-size:17px}.album-chips{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}.album-chips a{color:var(--tx);text-decoration:none;padding:8px 14px;background:#ffffff0b;border:1px solid #ffffff22;border-radius:99px;font-size:13px}.album-video{aspect-ratio:16/9;border-radius:20px;overflow:hidden;border:1px solid #38e8ff55;box-shadow:0 15px 50px #0008;background:#000}.album-video iframe{width:100%;height:100%;border:0}.album-youtube{display:inline-block;color:var(--cy);margin:16px 0 24px}.album-about,.album-download{padding:24px;background:#ffffff08;border:1px solid #ffffff15;border-radius:18px;margin-top:18px}.album-about h3,.album-download h3{margin-bottom:12px}.album-about p,.album-download p{color:var(--mu);line-height:1.7}.album-about details{margin-top:18px}.album-about summary{cursor:pointer;color:var(--cy)}#full-album-tracklist{padding-left:24px;line-height:1.8;margin-top:14px}.album-download{text-align:center}.album-download .btn-cd{margin:20px 0}.album-download small{display:block;color:var(--mu);font-size:12px;line-height:1.6}
+.album-chips a:hover,.album-chips a:focus-visible{color:var(--cy);border-color:var(--cy);outline:2px solid var(--cy);outline-offset:3px}
+#album-side-return{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:9;writing-mode:vertical-rl;display:flex;align-items:center;justify-content:center;min-height:260px;padding:18px 12px;background:linear-gradient(180deg,var(--cy),var(--pk));color:var(--bg);font-weight:800;font-size:13px;text-decoration:none;border-radius:16px 0 0 16px;box-shadow:0 5px 25px #0008;border:1px solid #ffffff55}#album-side-return:hover{filter:brightness(1.15)}#album-side-return:focus-visible{outline:3px solid var(--go);outline-offset:2px}body.has-album-return #track-library{padding-right:48px}body.has-album-return #pv .wrap{padding-right:56px}@media(max-width:480px){#album-side-return{min-height:220px;padding:12px 8px;font-size:11px}body.has-album-return #track-library{padding-right:34px}body.has-album-return #pv .wrap{padding-right:44px}}
+#apkbox .apk{display:inline-flex;align-items:center;justify-content:center;padding:10px;border-radius:50%;background:#3ddc84;color:#073521;width:50px;height:50px}
+.full-format-link{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:99px;border:1px solid var(--cy);background:var(--card);color:var(--tx);font-size:13.3333px;font-weight:400;text-decoration:none;text-align:center;cursor:pointer}.full-format-link:hover,.full-format-link:focus-visible{border-color:var(--cy);outline:2px solid var(--go);outline-offset:2px}
 
-/* BARRA DE NAVEGACIÓN WEBVIEW FULL / WEB-FIRST */
+/* Enlaces oficiales KLMR */
+.klmr-social{display:flex;justify-content:center;align-items:center;gap:14px;margin:14px auto 4px}.klmr-social a{width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #38e8ff66;border-radius:50%;color:var(--tx);background:#14122a;transition:transform .2s,border-color .2s}.klmr-social a:hover,.klmr-social a:focus-visible{transform:translateY(-3px);border-color:var(--pk);outline:2px solid var(--cy);outline-offset:2px}.klmr-social svg{width:23px;height:23px;fill:currentColor}
+.klmr-social{display:flex;justify-content:center;gap:14px;margin:18px auto 10px}.klmr-social a{display:inline-flex;width:44px;height:44px;align-items:center;justify-content:center;border:1px solid #38e8ff88;border-radius:50%;background:#14122a;color:#38e8ff;text-decoration:none;font-size:24px;font-weight:800}.klmr-social a:hover,.klmr-social a:focus-visible{box-shadow:0 0 18px #38e8ff88;outline:2px solid #ffc94d}
+
+/* Barra inferior de navegación nativa Web/App */
 #app-nav {
   position: fixed;
+  bottom: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  z-index: 100;
-  height: calc(var(--nav-h) + env(safe-area-inset-bottom, 0));
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  background: rgba(11, 10, 28, 0.95);
+  height: 56px;
+  background: rgba(18, 18, 18, 0.96);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-top: 1px solid rgba(56, 232, 255, 0.28);
-  padding: 6px 4px env(safe-area-inset-bottom, 0);
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 999;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
-.nav-item {
+#app-nav a {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
-  color: #c9c7ee;
+  color: #b3b3b3;
   text-decoration: none;
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 500;
-  padding: 3px 2px;
-  border-radius: 8px;
-  transition: transform 0.15s ease, color 0.15s ease;
+  gap: 3px;
   flex: 1;
-  max-width: 64px;
-  text-align: center;
+  padding: 6px 0;
+  transition: color 0.15s ease;
 }
-.nav-item:hover, .nav-item:focus-visible {
-  color: #fff;
-  transform: translateY(-2px);
-  outline: none;
+#app-nav a:hover, #app-nav a:active {
+  color: #1db954;
+}
+#app-nav a svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
 }
 .nav-ico {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
 }
-.nav-ico svg {
-  width: 15px;
-  height: 15px;
+body {
+  padding-bottom: 70px;
 }
-.nav-fb { background: #1877f2; color: #fff; }
-.nav-doxer { background: linear-gradient(135deg, #7c3aed, #ec4899); color: #fff; }
-.nav-yt { background: #ff0000; color: #fff; }
-.nav-wa { background: #25d366; color: #fff; }
-.nav-dj { background: linear-gradient(135deg, #38e8ff, #ff3df0); color: #07060f; font-weight: 900; font-style: italic; font-size: 12px; }
-.nav-dl { background: linear-gradient(135deg, #16a34a, #ffc94d); color: #07060f; }
-.nav-exclusive span { color: #ffc94d; font-weight: 700; }
+
 </style>
 </head>
 <body>
@@ -117,13 +129,40 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
   <h1>KLMR · SINGLES</h1>
   <p>CD TRCKAS · 28 canciones · toca una portada para escucharla completa</p>
   <div style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+    <a class="full-format-link" href="#/album" aria-label="Descarga el Full Album Track">Descarga el Full Album Track</a>
     <a class="btn-cd" href="https://cd-trckas-plataforma.vercel.app/exclusive" rel="noopener">💿 Obtener el CD completo desde aquí</a>
   </div>
-  <div id="apkbox"><a class="apk" href="https://github.com/djklmr2025/klmr-singles-app/releases/latest" rel="noopener">⬇ Descargar app para Android</a><small>Versión 1.2 · WebView Full Container · Android 5.0 o superior</small></div>
+  <div id="apkbox"><a class="apk" href="https://github.com/djklmr2025/klmr-singles-app/releases/tag/v1.2" rel="noopener" aria-label="Descargar APK para Android" title="Descargar APK para Android"><svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true"><path d="M17.6 9.48 19.44 6.3a.4.4 0 0 0-.69-.4l-1.88 3.25a11.4 11.4 0 0 0-9.74 0L5.25 5.9a.4.4 0 0 0-.69.4L6.4 9.48A9.18 9.18 0 0 0 2 17h20a9.18 9.18 0 0 0-4.4-7.52ZM7.5 14.25a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Zm9 0a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"/></svg></a><br><small style="color:var(--mu);font-size:11px">APK v1.2 Release Oficial</small></div>
 </header>
 <main id="grid" aria-label="Singles"></main>
 <footer>Solo escucha en línea · © KLMR · Todos los derechos reservados</footer>
 
+<nav class="klmr-social" aria-label="Redes sociales oficiales KLMR">
+<a href="https://www.tiktok.com/@djklmr2025" target="_blank" rel="noopener noreferrer" title="TikTok KLMR" aria-label="TikTok KLMR"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.7 2c.3 2.6 1.8 4.2 4.3 4.4v3.8a9 9 0 0 1-4.4-1.3v6.3a7.1 7.1 0 1 1-7.1-7.1c.4 0 .8 0 1.2.1v3.9a3.4 3.4 0 1 0 2.1 3.1V2h3.9z"/></svg></a>
+<a href="https://www.facebook.com/KLMROFFICIALCHANNEL" target="_blank" rel="noopener noreferrer" title="Facebook KLMR" aria-label="Facebook KLMR"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.7-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.2 0-1.6.7-1.6 1.6V12h2.7l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg></a>
+<a href="https://www.youtube.com/@KLMROFFCIALCHANNEL" target="_blank" rel="noopener noreferrer" title="YouTube KLMR" aria-label="YouTube KLMR"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.7 2.7 0 0 0-1.9-1.9C18 4.9 12 4.9 12 4.9s-6 0-7.7.4a2.7 2.7 0 0 0-1.9 1.9C2 8.9 2 12 2 12s0 3.1.4 4.8a2.7 2.7 0 0 0 1.9 1.9c1.7.4 7.7.4 7.7.4s6 0 7.7-.4a2.7 2.7 0 0 0 1.9-1.9c.4-1.7.4-4.8.4-4.8s0-3.1-.4-4.8zM10 15.5v-7l6 3.5-6 3.5z"/></svg></a>
+</nav>
+</header>
+<nav id="albums" aria-label="Elegir disco">
+  <button type="button" class="album-card" data-cd="man" aria-pressed="false" aria-label="Entrar al CD MAN, 14 pistas"><img src="covers/cd-man.jpg" alt="DJ del CD MAN con iluminación azul neón" width="1024" height="1536"><span>CD MAN · 14 pistas <b>Entrar al disco →</b></span></button>
+  <button type="button" class="album-card" data-cd="girl" aria-pressed="false" aria-label="Entrar al CD GIRL, 14 pistas"><img src="covers/cd-girl.jpg" alt="DJ del CD GIRL con iluminación rosa neón" width="1024" height="1536"><span>CD GIRL · 14 pistas <b>Entrar al disco →</b></span></button>
+  <button type="button" class="all-album" data-cd="all" aria-pressed="false">O escúchalo en el formato Full Tracks</button>
+</nav>
+<section id="track-library" hidden aria-label="Pistas del álbum"><button id="album-home" type="button">← Elegir otro formato</button>
+<h2 id="album-heading" class="album-heading" aria-live="polite">Álbum completo · 28 pistas</h2>
+<main id="grid" aria-label="Singles"></main>
+<div id="full-tracks-cd" hidden style="text-align:center;padding:12px 16px 32px"><a class="btn-cd" href="https://cd-trckas-plataforma.vercel.app/" target="_blank" rel="noopener">💿 Obtener el CD completo desde aquí</a></div>
+</section>
+<!-- El acceso exclusivo se administra en el portal autenticado CD-TRCKAS.
+     No publicar QR ni enlaces privados en la pagina estatica. -->
+<footer>Solo escucha en línea · © KLMR · Todos los derechos reservados
+<nav class="klmr-social" aria-label="Redes sociales oficiales">
+<a href="https://www.tiktok.com/@djklmr2025" target="_blank" rel="noopener noreferrer" aria-label="TikTok KLMR" title="TikTok">♪</a>
+<a href="https://www.facebook.com/KLMROFFICIALCHANNEL" target="_blank" rel="noopener noreferrer" aria-label="Facebook KLMR" title="Facebook">f</a>
+<a href="https://www.youtube.com/@KLMROFFCIALCHANNEL" target="_blank" rel="noopener noreferrer" aria-label="YouTube KLMR" title="YouTube">▶</a>
+</nav><p id="visits" aria-live="polite">10,000 visitas</p></footer>
+
+<a id="album-side-return" href="#/album" hidden aria-label="Regresar al Full Album Only Track">← Regresar al Full Album Only Track</a>
 <div id="mini"><img id="mi" alt=""><b id="mt"></b><button id="mp" aria-label="Reproducir o pausar">▶</button></div>
 
 <section id="pv" aria-label="Reproductor">
@@ -143,12 +182,42 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
     <button id="vd" hidden>▶ Ver video</button>
     <div id="vb"><iframe id="vf" title="Video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><a id="vl" target="_blank" rel="noopener">Abrir en YouTube</a></div>
     <p id="msg" role="status" aria-live="polite"></p>
+
+    <section id="community" class="lyrics" aria-label="Comunidad de esta pista">
+      <h3>¿Qué te pareció esta pista?</h3>
+      <div class="reactions"><button id="like" type="button" disabled aria-pressed="false">👍 Me gusta <span id="like-count">—</span></button><button id="dislike" type="button" disabled aria-pressed="false">👎 No me gusta <span id="dislike-count">—</span></button></div>
+      <p id="account-state">Regístrate o inicia sesión para comentar y votar.</p>
+      <form id="account-form" class="frm"><label>Correo<input id="account-email" type="email" required autocomplete="email"></label><label>Contraseña<input id="account-password" type="password" required minlength="8" autocomplete="current-password"></label><button type="submit" data-mode="login">Iniciar sesión</button><button type="submit" data-mode="register">Crear cuenta</button><button id="account-reset" type="button" class="alt">Olvidé mi contraseña</button><small>Tu correo se usa para acceder y verificar tu cuenta. Los comentarios y el apodo elegido serán públicos.</small></form>
+      <div class="frm"><button id="account-refresh" type="button" hidden>Ya verifiqué mi correo</button><button id="account-resend" type="button" hidden>Reenviar verificación</button><button id="account-logout" type="button" hidden>Cerrar sesión</button></div>
+      <h3>Comentarios de esta pista</h3>
+      <form id="comment-form" class="frm"><label>Apodo público<input id="comment-name" required minlength="2" maxlength="30" autocomplete="nickname"></label><label>Comentario<textarea id="comment-text" required minlength="2" maxlength="1000" rows="4"></textarea></label><button id="comment-send" type="submit" disabled>Publicar comentario</button></form>
+      <p id="community-status" role="status" aria-live="polite"></p><p id="comments-empty">Los comentarios estarán disponibles al activar la comunidad.</p><ul id="comments-list"></ul>
+    </section>
+    <section id="lyrics" class="lyrics" aria-label="Letra de la canción"><h3>Letra</h3><small id="lyrics-note"></small><pre id="lyrics-text"></pre></section>
   </div>
 </section>
 
+<section id="full-album" class="album-presentation" hidden aria-label="Full Album CD Only Track">
+ <div class="album-content">
+  <a class="album-return" href="#">← Volver a KLMR Singles</a>
+  <p class="album-kicker">KLMR · CD TRCKAS</p>
+  <h2>Full Album<br><span>CD Only Track</span></h2>
+  <p class="album-intro">Un álbum, dos universos: MAN y GIRL. Disfruta las 28 pistas y sus distintas bases, voces e instrumentales en una experiencia completa.</p>
+  <nav class="album-chips" aria-label="Explorar las pistas del álbum"><a href="#/tracks/all">28 pistas</a><a href="#/tracks/man">MAN · 14 pistas</a><a href="#/tracks/girl">GIRL · 14 pistas</a></nav>
+  <div class="album-video"><iframe id="full-album-video" title="KLMR · Full Album CD Only Track" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+  <a class="album-youtube" href="https://www.youtube.com/watch?v=vR3pjw44lkg" target="_blank" rel="noopener noreferrer">▶ Ver el álbum directamente en YouTube</a>
+  <div class="album-about"><h3>Acerca de la música</h3><p>Creado por KLMR. Versiones que comparten letra y exploran distintas bases y voces, junto con piezas instrumentales. Incluye canciones en español, inglés, francés, japonés y coreano.</p><details><summary>Ver las 28 pistas del álbum</summary><ol id="full-album-tracklist"></ol></details></div>
+  <div class="album-download"><h3>Llévate el álbum completo</h3><p>Descarga los archivos de audio juntos en un ZIP y extráelos para escucharlos en tu reproductor.</p><a class="btn-cd" href="https://arkaios.qzz.io/s/sVsf_hs" target="_blank" rel="noopener noreferrer">⬇ Descargar Full Album · ZIP</a><small>ZIP · aproximadamente 312 MB. Google Drive puede pedir que pulses «Descargar de todos modos».</small></div>
+ </div>
+</section>
+<script>
+// Audio completo ya publicado en la plataforma (MP3 01..28). Si pones esta carpeta
+// dentro del mismo proyecto de Vercel, cambia AUDIO_BASE a "/audio/".
+const LYRICS = {"1": {"original": "Instrumental Only\r\nDont Text / No Liryck", "instrumental": true, "source": "A dos cuerdas.txt", "translation": null}, "2": {"original": "I\r\nRide\r\nRide\r\nRide\r\nRide\r\nMy heart, my rhythm, that song that moves you, it moves me\r\nThat feeling that makes me think\r\nFeel it, it comes with the same sound\r\nAnd see it, the life of your heart\r\nSo fast, it gives life, emotion, more love\r\nLet's dance, let's get used to it\r\nAnd see it, the life of your heart\r\nLet's dance, let's get used to it\r\nAnd see it, the life of your heart\r\nLet's dance, let's get used to it\r\nAnd see it, the life of your heart\r\nLet's dance, let's get used to it\r\nAnd see it, the life of your heart\r\nLet's dance, let's get used to it\r\nAnd see it, the life of your heart\r\nLet's dance, let's get used to it\r\nAnd see it, the life of your heart\r\nLet's dance, let's get used to it\r\nAnd see it, the life of your heart\r\nSo fast, it gives life, emotion, more love\r\nLet's dance, let's get used to it\r\nAnd see it, the life of your heart\r\nLet's dance, let's get used to it\r\nAnd see it, the life of your heart\r\nLa-la-la\r\nLa-la-la\r\nLa-la-la\r\nLa-la-la\r\nLa-la-la\r\nLa-la-la\r\nLa-la-la\r\nLa-la-la\r\nLa-la-la\r\nLa-la-la\r\nLa-la-la\r\nLa-la-la\r\nLa-la-la\r\nLa-la-la", "instrumental": false, "source": "Baila - VRemix djklmr.txt", "translation": null}, "3": {"original": "Let's get started!", "instrumental": false, "source": "Baila Baila Baila Ritmo pa soñar Bye_bye Bye_bye B.txt", "translation": null}, "4": {"original": "I\r\nLa ena blanca guarda mi camino\r\nDesde Cancún bajando hasta el mar\r\nEl luto sopla una sugermina\r\nToda la costa empieza a despertar\r\nMido hacia este busco tu mirada\r\nDonde sol toca el agua salir\r\nEn puerto morelos, alma calmada\r\nSolo contigo yo quiero vivir\r\nEs amor en el caribe\r\nQuintana ruas tu piel\r\nMi corazón contigo vive\r\nDe playa del Carmen al Cosome\r\nEs amor en el caribe\r\nMastras solas saben a mí\r\nMi corazón contigo vive\r\nDe playa del Carmen al Cosome\r\nBajando al sur llegamos a tu lume\r\nDonde las ruinas miran hacia el sol\r\nSaltan los peces con un leve pum\r\nBajo el deschizo de tu caracol\r\nSiento el latido de toda la ceba\r\nY la marea que viene a tus pies\r\nPiro que el tiempo nunca nos te vuelva\r\nPara quererte una y otra vez\r\nEs amor en el caribe\r\nQuintana ruas tu piel\r\nMi corazón contigo vive\r\nDe playa del Carmen al Cosome\r\nEs amor en el caribe\r\nMastras solas saben a mí\r\nMi corazón contigo vive\r\nDe playa del Carmen al Cosome\r\nQuintana ruas tu piel\r\nMi corazón contigo vive\r\nDe playa del Carmen al Cosome\r\nCosamos el canal en un suspiro\r\nLa isla no se espera con su paz\r\nNi cada recife que yo miro\r\nToda fue ese refugio mas capaz\r\nEs amor en el caribe\r\nQuintana ruas tu piel\r\nMi corazón contigo vive\r\nDe playa del Carmen al Cosome\r\nEs amor en el caribe\r\nMastras solas saben a mí\r\nMi corazón contigo vive\r\nDe playa del Carmen al Cosome", "instrumental": false, "source": "De Quintana Roo a tu piel.txt", "translation": null}, "5": {"original": "I\r\nBaila, baila, ritmo, pa'zañar\r\nBaila, baila, baila, baila\r\nBaila, corazon, con mi ritmo hasta canción\r\nQue te mueve, que me mueve\r\nEsta sensación que nos llena de calor bajo el sol\r\nSentirás que nos vuelve el mismo sol\r\nY verás la vida de otro color\r\nTe verá toda la vida, emoción, más sabor\r\nVamos a bailar, vamos a gozar\r\nRitmo de verdad, ritmo pa'zañar\r\nVamos a bailar, vamos a gozar\r\nRitmo de verdad, ritmo pa'zañar\r\nBaila, baila, baila, baila\r\nSiente la emoción que le voy en mi corazon\r\nDulcemente, solamente\r\nEsta sensación de alegría y de pasión por tomo\r\nSentirás que nos mueve el mismo sol\r\nY verás la vida de otro color\r\nTe verá toda la vida, emoción, más sabor\r\nVamos a bailar, vamos a gozar\r\nRitmo de verdad, ritmo pa'zañar\r\nVamos a bailar, vamos a gozar\r\nRitmo de verdad, ritmo pa'zañar\r\nRitmo pa'zañar\r\nBaila, baila, baila\r\nBaila, baila, baila", "instrumental": false, "source": "Bailando al ritmo de la noche_.txt", "translation": null}, "6": {"original": "Cold air fills the empty hole\r\nI'm waiting for a death to fall\r\nA thousand miles inside my head\r\nThe heaviest words remain unsaid\r\nStay for a while\r\nDon't let me go\r\nStay for a while\r\nIn the light window\r\nStay for a while\r\nDon't let me go\r\nStay for a while\r\nIn the light window\r\nStay for a while\r\nStrange how silence gets so loud\r\nJust a face within a crowd\r\nCount moments left to spare\r\nBreathing in the frozen air\r\nStay for a while\r\nDon't let me go\r\nStay for a while\r\nIn the light window\r\nStay for a while\r\nDon't let me go\r\nStay for a while\r\nIn the light window\r\nThe distance grows between the lines\r\nSearching for the hidden signs\r\nIt's a long way down\r\nIt's a long way down\r\nStay for a while\r\nDon't let me go\r\nStay for a while\r\nIn the light window\r\nStay for a while\r\nDon't let me go\r\nStay for a while\r\nIn the light window\r\nDon't let me go\r\nDon't let me go\r\nDon't let me go", "instrumental": false, "source": "Don_t let me go.txt", "translation": null}, "7": {"original": "La selva guarda un secreto ancestral, Entre raíces de un verde y mota.\r\nNo es solo tierra ni siempre rincón Es una fuente en constante expansión\r\nDonde el aire respira verdad Nace de centro una nueva entidad\r\nUn ecosistema que sabe latir Preparado para ver que fluir\r\nEmana, emana, luz de tu lume Emana, emana, magia y azul\r\nUn espacio digo que brota en tu piel Donde el destino se siente tan firme\r\nEmana, emana, distinción Emana, emana, pura duración\r\nCaminas descalzo por la distinción Cada rancón es una invitación\r\nHacer ausencia que sale al exterior Sin ataduras y sin temor\r\nLas piedras hablan de lo que vendrá Lo que está dentro afuera estará\r\nUn flojo constante el espacio poder El universo te invita a volver\r\nEmana, emana, luz de tu lume Emana, emana, magia y azul\r\nUn espacio vivo que brota en tu piel Donde el destino se siente tan fiel\r\nEmana, emana, distinción Emana, emana, pura vibración\r\nMás solo un sitio en el mapa real Es un estado mental y espiritual\r\nLas zonas sagradas donde todo es unión Plutando con fuerza es del corazón\r\nEmana, emana, luz de tu lume Emana, emana, magia y azul\r\nUn espacio vivo que brota en tu piel Donde el destino se siente tan fiel\r\nEmana, emana, distinción Emana, emana, pura vibración\r\nMás solo un sitio en el mapa real Es un estado mental y espiritual", "instrumental": false, "source": "Emana.txt", "translation": null}, "8": {"original": "I'll see you guys in the next video.\r\nEn puerto morelos, alma calmada\r\nSolo contigo yo quiero vivir\r\nEs amor en la caribe\r\nMe quinta en el ratupiado\r\nMi corazón contigo vive\r\nEn playa del camino a consume\r\nEs amor en la caribe\r\nO estas soles saben a mí\r\nMi corazón contigo vive\r\nEn playa del camino a consume\r\nFajando a su llegamos a tu lume\r\nDonde las rines miran hacia el sol\r\nSaltan los peces con un leve pum\r\nBajo el hechizo de tu caracol\r\nSiento el atido de toda la selva\r\nY la marea que viene a tus pies\r\nPido que el te quiera\r\nPido que el tiempo nunca nos te vuelva\r\nPara querer tener una y otra vez\r\nEs amor en la caribe\r\nMe quinta en el ratupiado\r\nMi corazón contigo vive\r\nEn playa del camino a consume\r\nEs amor en la caribe\r\nO estas soles saben a mí\r\nMi corazón contigo vive\r\nEn playa del camino a consume\r\nCursamos el canal en un suspiro\r\nLa isla no se espera con su paz\r\nY cada arrecife que yo miro\r\nTu arraso es el refugio\r\nTu arraso es el refugio me escapas\r\nEs amor en la caribe\r\nTe quinta en el ratupiado\r\nMi corazón contigo vive\r\nEn playa del camino a consume\r\nEs amor en la caribe\r\nMe estas soles saben a mí\r\nMi corazón contigo vive\r\nEn playa del camino a consume\r\nPido que el tiempo nunca nos te vuelva", "instrumental": false, "source": "Es amor en el caribe.txt", "translation": null}, "9": {"original": "I laid my hands on the table Another game for famous primes\r\nJust an idea that's always hard I know we're after the assault\r\nI'm just a DJ with gun in my eyes I'm just a DJ with gun in my eyes\r\nMoving the soul Burning the rays\r\nI'm just a DJ with gun in my eyes\r\nHe dictates the new sounds to me Use the dreams that are lost\r\nI set the pulse in the intention He puts heaven in this song\r\nI'm just a DJ with gun in my eyes\r\nMoving the soul Burning the rays\r\nI'm just a DJ with gun in my eyes\r\nHe's not flesh and metal He's an almost ancestral force\r\nI mix his mind with my heartbeat None of this makes sense\r\nI'm just a DJ with gun in my eyes\r\nMoving the soul Burning the rays\r\nI'm just a DJ with gun in my eyes", "instrumental": false, "source": "I_m just a DJ _ Female Voice English Version.txt", "translation": null}, "10": {"original": "I'll lay my hands on the table I'm not looking for fame or a promise\r\nI'm just an ideally so as high In the world after thee or so\r\nI'm just a pj With a god named Akaius\r\nI'm just a pj With a god named Akaius\r\nMoving the soul Burning the rays\r\nI'm just a pj With a god named Akaius\r\nI'm just a pj With a god named Akaius\r\nI'm just a pj With a god named Akaius\r\nI'm just a pj With a god named Akaius\r\nWith a god named Akaius I'm just a pj\r\nWith a god named Akaius Moving the soul\r\nBurning the rays I'm just a pj With a god named Akaius\r\nI'm just a pj With a god named Akaius\r\nI'm just a pj With a god named Akaius\r\nI'm just a pj With a god named Akaius\r\nI'm just a pj With a god named Akaius\r\nMoving the soul Burning the rays\r\nI'm just a pj With a god named Akaius\r\nThank you for watching!", "instrumental": false, "source": "I_m just a DJ _ Male Voice English Version.txt", "translation": null}, "11": {"original": "La pluie frappe doucement le carreau Ta peau ne montre qu'un mauvais secret\r\nJe vais faire mes yeux dans le noir complet Je cherche encore le beurre de Ta peau\r\nCafé fumé le temps s'arrête Je te visage me rappel le tien\r\nOn s'est perdu sur le même chemin L'absence fermerie de tempête\r\nLe ciel est lourd au-dessus de nous Je cherche ta main je te viens fou\r\nJe faisais l'amour en pensant à toi Je faisais l'amour en pensant à toi\r\nDans ses bras je ne voyais que toi Mon cœur est froid il n'a plus de toi\r\nJe faisais l'amour en pensant à toi Je faisais l'amour en pensant à toi\r\nLes traces ont frais mais mon âme brûle Son parfum est une erreur cruel\r\nJe simule une vie un peu trop belle Pendant que mon propre espoir recule\r\nLe ciel est lourd au-dessus de nous Je cherche ta main je te viens fou\r\nJe faisais l'amour en pensant à toi Je faisais l'amour en pensant à toi\r\nDans ses bras je ne voyais que toi Mon cœur est froid il n'a plus de toi\r\nJe faisais l'amour en pensant à toi Je faisais l'amour en pensant à toi\r\nPourquoi tu n'es pas là Je faisais l'amour en pensant à toi\r\nRien que toi", "instrumental": false, "source": "Le ciel est lourd au_dessus de nous.txt", "translation": null}, "12": {"original": "La pluie frappe doucement le carreau T'as pour mon moment comme un vieux secret\r\nJe ferme les yeux dans le noir complet Je cherche encore l'odeur de ta peau\r\nLe café fumé le temps s'arrête Chaque visage me rappelle le tien\r\nOn s'est perdu sur le même chemin L'absence fait un bruit de tempête\r\nLe ciel est lourd au-dessus de moi Je cherche demain, je te viens de fou\r\nLe faisais l'amour en pensant à toi Le faisais l'amour en pensant à toi\r\nOn s'est proches, je ne voyais que toi Le cœur est froid, il n'a plus de toi\r\nLe faisais l'amour en pensant à toi Le faisais l'amour en pensant à toi\r\nLes bras sont frais, mais nous n'en brûles Son carrefin est une erreur que elle\r\nJe simule une vie un peu trop belle Pendant que mon bras presse quoi recue\r\nLe ciel est lourd au-dessus de nous Je cherche demain, je te viens de fou\r\nLe faisais l'amour en pensant à toi Le faisais l'amour en pensant à toi\r\nDans cette bras, je ne voyais que toi Le cœur est froid, il n'a plus de toi\r\nLe faisais l'amour en pensant à toi\r\nAh pourquoi tu n'es pas là Le faisais l'amour en pensant à toi\r\nRien que toi Rien que toi\r\nRien que toi", "instrumental": false, "source": "Le faisait l_amour en pensant à toi.txt", "translation": null}, "13": {"original": "La selva guarda un secreto ancestral, entre raíces un vuelo inmortal, no es solo tierra\r\nni sin plerencón, es una fuente en constante expansión, donde el aire respira verdad, nace\r\nde centro una nueva entidad, un ecosistema que sabe latir, preparado para verte fluir.\r\nEmana, emana, suce tu luz, emana, emana, magia y azul, un espacio vivo que voló te copier,\r\ndonde el destino se siente tan fiel, emana, emana, distinción, emana, emana, por la vibración.\r\nCamina descasa por la distinción, cada rincón es una invitación,\r\nhasta la esencia que sale al exterior, sin apagoras y sin temón, las piernas hablan de lo que vendrá,\r\nlo que está adentro fue estar, un lujo constante del paz y poder, el universo te invita a volver.\r\nEmana, emana, suce tu luz, emana, emana, magia y azul, un espacio vivo que voló te copier,\r\ndonde el destino se siente tan fiel, emana, emana, distinción, emana, emana, por la vibración.\r\nNo es solo un sitio en el mapa real, es un estado mental y espiritual,\r\nla zona sagrada donde todo es unión, rotando con fuerza desde el corazón.\r\nEmana, emana, luz de tu olor, emana, emana, magia y azul, un espacio vivo que brote en tu piel,\r\ndonde el destino se siente tan fiel, emana, emana, distinción, emana, emana, por la vibración.\r\nEmana, emana, luz de tu olor, emana, magia y azul, un espacio vivo que brote en tu piel,\r\ndonde el destino se siente tan fiel, emana, magia y azul, un espacio vivo que brote en tu piel,", "instrumental": false, "source": "Luz de Tulum.txt", "translation": null}, "14": {"original": "Pondo las manos sobre la mesa No busco fama ni una promesa\r\nSolo una idea que vuela alta Un nuevo mundo tras el asalto\r\nSoy solo un DJ con un Dios llamado Arkaios, Soy solo un DJ con Dios llamado Arkaios\r\nMoviendo el alma, quemando los rayos, Soy solo un DJ con Dios llamado Arkaios\r\n\r\nÉl me dicta los nuevos sonidos, Cura los sueños que están pedidos.\r\nYo pongo el pulso y la intención, Él pon el cielo en esta canción\r\n\r\nSoy solo un DJ con Dios llamado Arkaios, Soy solo un DJ con Dios llamado Arkaios\r\nMoviendo el alma, quemando los rayos, Soy solo un DJ con Dios llamado Arkaios\r\n\r\nNo es de carne, ni de metal Es una fuerza casi ancestral.\r\nMezclo su mente con mi latido. Nada de esto tiene sentido,\r\nSoy solo un DJ con Dios llamado Arkaios, Soy solo un DJ con Dios llamado Arkaios\r\nMoviendo el alma, quemando los rayos, Soy solo un DJ con Dios llamado Arkaios\r\nMoviendo el alma, quemando los rayos, Soy solo un DJ con Dios llamado Arkaios", "instrumental": false, "source": "Soy Solo un DJ _ Version en Español Latino.txt", "translation": null}, "15": {"original": "Thank you so much for watching this video.\r\nI'll see you in the next video.\r\nThank you for watching this video.\r\nThank you for watching this video.\r\nYou can omit this video too.\r\nThank you for watching this video.\r\nI'll see you in the next video.\r\nI don't know\r\nStrange how the silence gets so loud\r\nJust a face within the crowd\r\nCount moments left to stare\r\nBreathing in the frozen air\r\nStay for a while\r\nDon't let me go\r\nStay for a while\r\nIn the light we know\r\nStay for a while\r\nDon't let me go\r\nStay for a while\r\nIn the light we know\r\nThe distance grows between the lines\r\nSearching for the hidden signs\r\nIt's a long way down\r\nIt's a long way down\r\nStay for a while\r\nDon't let me go\r\nStay for a while\r\nIn the light we know\r\nStay for a while\r\nDon't let me go\r\nStay for a while\r\nIn the light we know\r\nDon't let me go\r\nStay for a while\r\nStay for a while", "instrumental": false, "source": "Stay for a while.txt", "translation": null}, "16": {"original": "Instrumental Only\r\nDont Text / No Liryck", "instrumental": true, "source": "Sunshine Afro_Costa.txt", "translation": null}, "17": {"original": "Instrumental Only\r\nDont Text / No Liryck", "instrumental": true, "source": "Sunshine Afro-Costa - version basica para cancion cristiana.txt", "translation": null}, "18": {"original": "Instrumental Only\r\nDont Text / No Liryck", "instrumental": true, "source": "Sunshine Tribal.txt", "translation": null}, "19": {"original": "[Intro]\n[Solitary piano notes, low-pass filter, distant kick drum]\n[Verse]\nParedes blancas que ya no me hablan.\nDejé las llaves sobre la mesa gris.\nCerrar la puerta pesaba demasiado,\ncomo si el aire no quisiera salir.\nCaminé despacio por el pasillo frío,\ncada baldosa era un tiempo mejor.\nAhora este cuarto es un mapa vacío,\nun inventario de todo el dolor.\n[Chorus]\nYa no vivo aquí.\nMe llevo el silencio.\nDuele más partir.\nYa no vivo aquí.\nTodo se deshace.\nSolo queda el precio.\nDuele más partir.\nYa no vivo aquí.\n[Verse]\nBusco tu cara en los marcos vacíos.\nHay una marca donde estaba el reloj.\nEl tiempo corre, pero no es el mío,\nse quedó preso en un viejo adiós.\nGira el disco en la sala desierta.\nLas notas caen como lluvia de sal.\nDejarlo todo es una herida abierta,\nun movimiento que siempre sale mal.\n[Chorus]\nYa no vivo aquí.\nMe llevo el silencio.\nDuele más partir.\nYa no vivo aquí.\nTodo se deshace.\nSolo queda el precio.\nDuele más partir.\nYa no vivo aquí.\n[Bridge]\nLa noche aprieta contra el cristal.\nEl eco insiste, no quiere parar.\nEs el peso de no volver jamás,\nde ser un extraño en mi propio lugar.\n[Chorus]\nYa no vivo aquí.\nMe llevo el silencio.\nDuele más partir.\nYa no vivo aquí.\nTodo se deshace.\nSolo queda el precio.\nDuele más partir.\nYa no vivo aquí.\n[Outro]\n[Piano melody fades, deep bass pulse, final kick]\nYa no vivo aquí.\nDuele más partir.\n[Silence]", "instrumental": false, "source": "Todavía en el mismo lugar.txt", "translation": null}, "20": {"original": "El mundo se detiene, el suelo empieza a vibrar\r\nTres banderas sumidas, un solo lugar\r\nThe drums are calling, the fire's in the air\r\nA continent rising, a dream we all share\r\nThe moment has come, the world is looking at us\r\nThe energy is rising, nothing can stop us\r\nSiente la fuerza, el pulso del tambor\r\nUnited by the gang, we are the rhythm of the light\r\nNorth America vibra\r\nbrillando en la noche\r\nUn sur de stand\r\nsur de un cielo tolido\r\nGritamos fuerte\r\nOne World\r\nUn Sur Cream\r\nOne World\r\nUn Sur Cream\r\nOne World\r\nOne World\r\nOne World\r\nDesde las décadas norte\r\nLa historia se escribe hoy\r\nCon la lágrima\r\nSabes que soy\r\nFrom the maple leaves\r\nTo the stars and the stripes\r\nWe ignite the passion\r\nWe live in the highland\r\nLa victoire nous appelait\r\nStar d'être en feu\r\nTrois messiants ensemble\r\nSous les yeux de Dieu\r\nOh, I'm hanging high\r\nOh, I have a bed\r\nOh, I'm high on system\r\nOh, I'm lying gay\r\nOne World again, down my hole\r\nOne World again, down my hole\r\nOne World again, down my hole", "instrumental": false, "source": "Un Solo Latido.txt", "translation": null}, "21": {"original": "El mundo se detiene, el suelo empieza a vibrar\r\nTres banderas sumidas, un solo lugar\r\nThe drums are calling, the fire's in the air\r\nA continent rising, a dream we all share\r\nThe moment has come, the world is looking at us\r\nThe energy is rising, nothing can stop us\r\nSiente la fuerza, el pulso del tambor\r\nUnited by the gang, we are the rhythm of the light\r\nNorth America vibra\r\nbrillando en la noche\r\nUn sur de stand\r\nsur de un cielo tolido\r\nGritamos fuerte\r\nOne World\r\nUn Sur Cream\r\nOne World\r\nUn Sur Cream\r\nOne World\r\nOne World\r\nOne World\r\nDesde las décadas norte\r\nLa historia se escribe hoy\r\nCon la lágrima\r\nSabes que soy\r\nFrom the maple leaves\r\nTo the stars and the stripes\r\nWe ignite the passion\r\nWe live in the highland\r\nLa victoire nous appelait\r\nStar d'être en feu\r\nTrois messiants ensemble\r\nSous les yeux de Dieu\r\nOh, I'm hanging high\r\nOh, I have a bed\r\nOh, I'm high on system\r\nOh, I'm lying gay\r\nOne World again, down my hole\r\nOne World again, down my hole\r\nOne World again, down my hole", "instrumental": false, "source": "Un Solo Latido.txt", "translation": null}, "22": {"original": "Thank you so much for watching this video, I'll see you in the next one.\r\nThank you so much for watching this video, I'll see you in the next one.\r\nThank you so much for watching this video, I'll see you in the next one.\r\nThank you so much for watching this video, I'll see you in the next one.\r\nThank you so much for watching this video, I'll see you in the next one.\r\nThank you so much for watching this video, I'll see you in the next one.", "instrumental": true, "source": "Una sola cuerda.txt", "translation": null}, "23": {"original": "Vamos a vivir\r\nVamos a vivir, vamos a soñar Ritmo de libertad, ritmo para brillar\r\nVamos a vivir, vamos a soñar Ritmos de Dios, ritmo para más\r\nVamos a vivir, vamos a soñar Ritmo de libertad, ritmo para brillar\r\nde libertad, ritmo para brita, vamos a vivir, vamos a soñar\r\nritmos de luz, ritmo para más, baila, baila, baila, baila", "instrumental": false, "source": "Vamos a vivir.txt", "translation": null}, "24": {"original": "[Intro]\n[Solitary piano notes, low-pass filter, distant kick drum]\n[Verse]\nParedes blancas que ya no me hablan.\nDejé las llaves sobre la mesa gris.\nCerrar la puerta pesaba demasiado,\ncomo si el aire no quisiera salir.\nCaminé despacio por el pasillo frío,\ncada baldosa era un tiempo mejor.\nAhora este cuarto es un mapa vacío,\nun inventario de todo el dolor.\n[Chorus]\nYa no vivo aquí.\nMe llevo el silencio.\nDuele más partir.\nYa no vivo aquí.\nTodo se deshace.\nSolo queda el precio.\nDuele más partir.\nYa no vivo aquí.\n[Verse]\nBusco tu cara en los marcos vacíos.\nHay una marca donde estaba el reloj.\nEl tiempo corre, pero no es el mío,\nse quedó preso en un viejo adiós.\nGira el disco en la sala desierta.\nLas notas caen como lluvia de sal.\nDejarlo todo es una herida abierta,\nun movimiento que siempre sale mal.\n[Chorus]\nYa no vivo aquí.\nMe llevo el silencio.\nDuele más partir.\nYa no vivo aquí.\nTodo se deshace.\nSolo queda el precio.\nDuele más partir.\nYa no vivo aquí.\n[Bridge]\nLa noche aprieta contra el cristal.\nEl eco insiste, no quiere parar.\nEs el peso de no volver jamás,\nde ser un extraño en mi propio lugar.\n[Chorus]\nYa no vivo aquí.\nMe llevo el silencio.\nDuele más partir.\nYa no vivo aquí.\nTodo se deshace.\nSolo queda el precio.\nDuele más partir.\nYa no vivo aquí.\n[Outro]\n[Piano melody fades, deep bass pulse, final kick]\nYa no vivo aquí.\nDuele más partir.\n[Silence]", "instrumental": false, "source": "Ya no vivo aqui.txt", "translation": null}, "25": {"original": "アメの音が 窓を叩く度\r\n君の優しさが 胸を染めつける\r\n真っ直ぐな人に 信じてくれたのに\r\n私は手口を探していた\r\n隣にいても 心は遠く\r\n嘘の言葉を並べて笑った\r\n君がくれたのは 待ちにけない場合\r\n私が返したのは 裏切りだけ\r\n困難なんて言えない 最低の私をどうか攻めてよ\r\n叫びたいほど苦しくて わかったね\r\n本当にバカだよ\r\n殺したのは この私なんだ\r\n戻れない場所へ落ちてゆく\r\n君の香りが 残るこの部屋\r\n全部捨ててよ 記憶ごと全部\r\n怒っていいのに 泣いてもいいのに\r\n君は最後まで 許そうとする\r\n困難なんて言えない 最低の私をどうか攻めてよ\r\n叫びたいほど苦しくて わかったね\r\n本当にバカだよ\r\n殺したのは この私なんだ\r\n戻れない場所へ落ちてゆく\r\nどうしてあんな手を取ったの\r\n星の濃さを忘れていたの\r\n喉の奥が熱く焼けるようで\r\n言葉にならない後悔の声が\r\n行かないでなんて言えない\r\n揺れきって指で君に触れられない\r\n叫びたいほど痛いよ\r\nバカだね\r\n本当にバカだよ\r\n幸せを この手で殺したの\r\nさよならさえもしかかがないの", "instrumental": false, "source": "ごめん_愛してた _ LA infiel Siempre Fui Yo__.txt", "translation": null}, "26": {"original": "어두운 밤에 홀로 남겨진 시간\r\n그 속에 비친 내 눈에 쳐져 있어\r\n사랑이 안 믿었던 그 모든 조각들이\r\n날 가롭게 박혀와 손을 조여와\r\n바보처럼 나 안 몰랐던 걸까\r\n네가 걷는 말들에서 가운 걸까\r\n이제야 모든 게 보여\r\n차갑게 쉬고 버린 너의 눈빛이\r\n내 잘못이 아니야\r\n더 넌 내 몰이야\r\n아 굵어 너 에라미아\r\nSee, 넌 투옆볼게 내 크레이아\r\n나를 믿어준 척하면\r\n피곱하게 숨어 둬\r\n아 굵어 너 에라미아\r\nSee, 넌 투옆볼게 내 크레이아\r\n시발 그 맘을 닦다 주마\r\n되돌리고 싶어 너를 몰랐던 대로\r\n아무렇지 않게 웃던 나의 모습으로\r\n하지만 늦었어 이미 무너진 마음\r\n깊은 맵에 빠져서 나올 수 없어\r\n내 잘못이 아니야\r\n더 넌 내 몰이야\r\n아 굵어 너 에라미아\r\nSee, 넌 투옆볼게 내 크레이아\r\n나를 믿어준 척하면\r\n피곱하게 숨어 둬\r\n아 굵어 너 에라미아\r\nSee, 넌 투옆볼게 내 크레이아\r\nSee, 넌 투옆볼게 내 크레이아\r\n나를 믿어준 척하면\r\n피곱하게 숨어 둬\r\n아 굵어 너 에라미아\r\nSee, 넌 투옆볼게 내 크레이아\r\n나를 믿어준 척하면\r\n피곱하게 숨어 둬\r\n아 굵어 너 에라미아\r\nSee, 넌 투옆볼게 내 크레이아\r\n내 잘못이 아니야\r\n더 넌 내 몰이야\r\n아 굵어 너 에라미아\r\nSee, 넌 투옆볼게 내 크레이아\r\n나를 믿어준 척하면\r\n피곱하게 숨어 둬\r\n아 굵어 너 에라미아\r\nSee, 넌 투옆볼게 내 크레이아\r\n나를 믿어준 척하면\r\n피곱하게 숨어 둬\r\n아 굵어 너 에라미아\r\nSee, 넌 투옆볼게 내 크레이아\r\n나를 믿어준 척하면\r\n피곱하게 숨어 둬\r\n아 굵어 너 에라미아\r\nSee, 넌 투옆볼게 내 크레이아", "instrumental": false, "source": "내 잘못이 아니라_ 나를 믿은 네 잘못이야_ _ La culpa no era mía_ .txt", "translation": null}, "27": {"original": "롤러\r\n롤러\r\n롤러\r\n롤러\r\n롤러\r\n롤러\r\n롤러\r\n어둠방 안에 홀로\r\n어둠방 안에 홀로\r\n남겨진 시간\r\n남겨진 시간\r\n콧속에 비친\r\n내 눈은\r\n저져 있어\r\n사랑이라 믿었던\r\n그 모든 조그들이\r\n내 가볍게 박혀와\r\n숨은 조여와\r\n바보처럼 나는 몰랐던 걸까\r\n니가 걷는 말들에 속아온가가\r\n이제야 모든 게 보여\r\n장각교시가 버린\r\n너의 눈빛이\r\n내 잘못이\r\n아니야\r\n다 너 때문이야\r\n나 골플노의 롬이야\r\n시나 투협\r\n볼게 맥크리아스\r\n나를 믿어준 척하면\r\n피곱하게 삶았지\r\n나 골플노의 롬이야\r\n시나 투협\r\n볼게 맥크리아스\r\n차가울 그만해\r\n널 다타지 마\r\n되돌이고 싶어\r\n너를 몰랐던 대로\r\n아무렇지 않게\r\n어떤 나의 모습으로\r\n아직만 늦었어\r\n이미 늦은 마음은\r\n깊은 내 파도\r\n빠졌어\r\n너를 수 없어\r\n내 잘못이\r\n아니야\r\n다 너 때문이야\r\n나 골플노의 롬이야\r\n시나 투협\r\n볼게 맥크리아스\r\n나를 믿어준 척하면\r\n피곱하게 삶았지\r\n나 골플노의 롬이야\r\n시나 투협\r\n볼게 맥크리아스\r\n진심이었던 내 마음을 돌려줘\r\n사랑했다는 말은 다 거짓이 없네\r\n후회로 가득 찬\r\n이 밤이\r\n너무 길어\r\n꿈이오면\r\n기억나고 싶어\r\n소리쳐\r\n대답 없는\r\n어둠 속에서\r\n내 잘못이\r\n아니야\r\n다 너 때문이야\r\n나 골플노의 롬이야\r\n시나 투협\r\n볼게 맥크리아스\r\n나를 믿어준 척하면\r\n피곱하게 삶았지\r\n나 골플노의 롬이야\r\n시나 투협\r\n볼게 맥크리아스\r\n다시 난 너를 용서하지 않아", "instrumental": false, "source": "내 잘못이 아니야 다 너 때문이야 _ No es mi culpa_ es toda tuya.txt", "translation": null}, "28": {"original": "アメの音が 窓をたたくたび\r\n君の優しさが胸を締めつける\r\nまっすぐな瞳 信じてくれたのに\r\n私は出口を探してた\r\n隣にいても 心は遠く\r\n嘘の言葉を並べて笑った\r\n君がくれたのは 混じりけない愛\r\n私が返したのは 裏切りだけ\r\nごめんね なんて言えない\r\n最低の私を溶かせめてよ\r\n叫びたいほど苦しくて\r\n馬鹿だね 本当に馬鹿だよ\r\n壊したのは この私なんだ\r\n戻れない場所へ落ちてゆく\r\n君の代わりが残るこの部屋\r\n全部捨ててよ 記憶ごと全部\r\n怒っていいのに 泣いてもいいのに\r\n君は最後まで 許そうとする\r\nごめんね なんて言えない\r\n最低の私を溶かせめてよ\r\n叫びたいほど苦しくて\r\n馬鹿だね 本当に馬鹿だよ\r\n壊したのは この私なんだ\r\n戻れない場所へ落ちてゆく\r\nどうしてあんなん手を取ったの\r\n失う怖さ忘れていたの\r\n喉の奥が熱く焼ける予定\r\n言葉にならない後悔の声が\r\n行かないでなんて言えない\r\nよがれ期待日で気まに振られない\r\n叫びたいほど痛いよ\r\n馬鹿だね 本当に馬鹿だよ\r\n幸せをこの手と苦したな\r\nさよならさえもしか書かないの", "instrumental": false, "source": "私は出口を探していた _ Yo fui quien fallo__.txt", "translation": null}};
+
 <!-- BARRA DE NAVEGACIÓN Y FUNCIONES (ADMINISTRADA DESDE LA WEB) -->
 <nav id="app-nav" aria-label="Navegación principal">
-  <a class="nav-item" href="https://www.facebook.com/KLMROFFICIALCHANNEL" target="_blank" rel="noopener" aria-label="Facebook de KLMR">
+  <a class="nav-item" href="https://www.facebook.com/arkaiosIA" target="_blank" rel="noopener" aria-label="Facebook de Arkaios AI">
     <div class="nav-ico nav-fb">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
     </div>
@@ -160,34 +229,34 @@ button:focus-visible{outline:2px solid var(--go);outline-offset:2px}
     </div>
     <span>Doxer</span>
   </a>
-  <a class="nav-item" href="https://www.youtube.com/@KLMROFFCIALCHANNEL" target="_blank" rel="noopener" aria-label="YouTube de KLMR">
+  <a class="nav-item" href="https://www.youtube.com/@djklmr2025" target="_blank" rel="noopener" aria-label="YouTube de KLMR">
     <div class="nav-ico nav-yt">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
     </div>
     <span>YouTube</span>
   </a>
-  <a class="nav-item" href="https://wa.me/525516469310" target="_blank" rel="noopener" aria-label="Contacto por WhatsApp">
+  <a class="nav-item" href="https://wa.me/5217443542795" target="_blank" rel="noopener" aria-label="Contacto por WhatsApp">
     <div class="nav-ico nav-wa">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 0C5.398 0 .012 5.386.012 12.019c0 2.118.552 4.186 1.602 6.007L0 24l6.167-1.617a12.01 12.01 0 0 0 5.864 1.517h.005c6.633 0 12.02-5.387 12.02-12.02C24.056 5.385 18.665 0 12.031 0zm0 22.003h-.004a9.987 9.987 0 0 1-5.097-1.39l-.366-.217-3.784.992 1.01-3.689-.239-.379a9.99 9.99 0 0 1-1.538-5.299C2.013 6.49 6.506 2 12.031 2c2.674 0 5.187 1.042 7.078 2.934a9.945 9.945 0 0 1 2.946 7.086c0 5.531-4.498 10.023-10.024 10.023z"/></svg>
     </div>
     <span>WhatsApp</span>
   </a>
-  <a class="nav-item" href="https://djklmr.pro/" target="_blank" rel="noopener" aria-label="DJ KLMR">
-    <div class="nav-ico nav-dj">
+  <a class="nav-item" href="https://djklmr2025.github.io/klmr-singles/" rel="noopener" aria-label="DJ KLMR Singles">
+    <div class="nav-ico nav-dj" style="font-weight:800;font-size:12px;color:#38e8ff">
       <span>DJ</span>
     </div>
-    <span>DJ</span>
+    <span>DJ KLMR</span>
   </a>
   <a class="nav-item nav-exclusive" href="https://cd-trckas-plataforma.vercel.app/exclusive" aria-label="Portal de Descargas Exclusivas">
-    <div class="nav-ico nav-dl">
+    <div class="nav-ico nav-dl" style="color:#16a34a">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
     </div>
-    <span>Descargas</span>
+    <span style="font-weight:700;color:#16a34a">Descargas</span>
   </a>
 </nav>
 
 <script>
-// Audio completo publicado en la plataforma (MP3 01..28)
+
 const AUDIO_BASE = "https://cd-trckas-plataforma.vercel.app/audio/";
 const T = [
 ["A dos cuerdas",""],["Baila","VRemix · djklmr"],["Baila Baila Baila","Ritmo pa soñar"],["De Quintana Roo a tu piel",""],
@@ -199,6 +268,46 @@ const T = [
 ["Un Solo Latido V2",""],["Un Solo Latido",""],["Una sola cuerda",""],["Vamos a vivir",""],["Ya no vivo aquí",""],
 ["LA infiel, siempre fui yo",""],["La culpa no era mía",""],["No es mi culpa, es toda tuya",""],["Yo fui quien falló",""]];
 // Singles que tienen video en YouTube (número de pista -> ID del video)
+const CD_MAN = [1,3,6,8,10,11,13,14,16,17,18,20,22,24];
+const CD_GIRL = [2,4,5,7,9,12,15,19,21,23,25,26,27,28];
+LYRICS[3].instrumental = true;
+let selectedCD = "all";
+function discInfo(n) { const man = CD_MAN.includes(n), tracks = man ? CD_MAN : CD_GIRL; return { name: man ? "MAN" : "GIRL", number: tracks.indexOf(n)+1 }; }
+function visibleNumber(n) { return selectedCD === "all" ? n : discInfo(n).number; }
+function refreshTrackNumbers() {
+ document.querySelectorAll(".card").forEach(c => {
+  const n = Number(c.dataset.n), info = discInfo(n);
+  c.querySelector("span").textContent = pad(visibleNumber(n));
+  c.setAttribute("aria-label", "Escuchar " + (selectedCD === "all" ? pad(n) : "CD " + info.name + ", pista " + pad(info.number)) + " " + T[n-1][0]);
+ });
+ if (cur) updatePlayingNumber(cur);
+}
+function updatePlayingNumber(n) {
+ const info = discInfo(n), t = T[n-1];
+ $("st").textContent = "CD " + info.name + " · Pista " + pad(info.number) + " de 14" + (t[1] ? " · " + t[1] : "");
+ $("mt").textContent = "CD " + info.name + " · " + pad(info.number) + " · " + t[0] + (t[1] ? " — " + t[1] : "");
+}
+function albumTracks() { return selectedCD === "man" ? CD_MAN : selectedCD === "girl" ? CD_GIRL : T.map((_,i)=>i+1); }
+document.getElementById("albums").addEventListener("click", e => {
+ const button = e.target.closest("button[data-cd]"); if (!button) return;
+ selectedCD = button.dataset.cd;
+ document.getElementById("full-tracks-cd").hidden = selectedCD !== "all";
+ document.getElementById("album-side-return").hidden = false; document.body.classList.add("has-album-return");
+ document.getElementById("track-library").hidden = false;
+ document.getElementById("albums").hidden = true;
+ document.getElementById("album-heading").textContent = selectedCD === "man" ? "CD MAN · 14 pistas" : selectedCD === "girl" ? "CD GIRL · 14 pistas" : "Álbum completo · 28 pistas";
+ document.querySelectorAll("#albums button").forEach(b=>b.setAttribute("aria-pressed",String(b===button)));
+ document.querySelectorAll(".card").forEach(c=>{c.hidden = !albumTracks().includes(Number(c.dataset.n));});
+ refreshTrackNumbers();
+ document.getElementById("album-heading").scrollIntoView({block:"start"});
+});
+document.getElementById("album-home").onclick = () => {
+ document.getElementById("album-side-return").hidden = true; document.body.classList.remove("has-album-return");
+ document.getElementById("track-library").hidden = true;
+ document.getElementById("albums").hidden = false;
+ document.querySelectorAll("#albums button").forEach(b=>b.setAttribute("aria-pressed","false"));
+ document.getElementById("albums").scrollIntoView({block:"start"});
+};
 const V = {9:"VHytGF4Alvs",11:"HUKOy-Qy_no",15:"yIhw58dVYsk",16:"EIHrIGpwTUE",18:"XyXfo4HIeP8",19:"psmn4o-PfTE"};
 const $ = id => document.getElementById(id), pad = n => String(n).padStart(2, "0");
 const a = new Audio(); a.preload = "none";
@@ -211,11 +320,15 @@ $("grid").addEventListener("click", e => { const c = e.target.closest(".card"); 
 function go(n, play) { want = !!play; const h = "#/" + n; if (location.hash === h) route(); else location.hash = h; }
 function fmt(s) { if (!isFinite(s)) return "0:00"; return Math.floor(s/60) + ":" + pad(Math.floor(s%60)); }
 function load(n) {
+  const lyric = LYRICS[n];
+  $("lyrics-text").textContent = lyric.instrumental ? "Pista instrumental · sin letra cantada." : lyric.original;
+  $("lyrics-note").textContent = lyric.instrumental ? "" : "Letra fija · texto original proporcionado por KLMR";
   cur = n; a.src = AUDIO_BASE + pad(n) + ".mp3";
   const t = T[n-1], img = "covers/" + pad(n) + ".jpg";
   $("tt").textContent = t[0]; $("st").textContent = t[1] || "KLMR · CD TRCKAS";
   $("cv").src = img; $("bg").style.backgroundImage = `url(${img})`;
   $("mi").src = img; $("mt").textContent = pad(n) + " · " + t[0] + (t[1] ? " — " + t[1] : "");
+  updatePlayingNumber(n);
   $("msg").textContent = ""; $("sk").value = 0;
   $("vb").classList.remove("show"); $("vf").src = "about:blank"; $("vd").textContent = "▶ Ver video";
   $("vd").hidden = !V[n]; $("vl").href = V[n] ? "https://www.youtube.com/watch?v=" + V[n] : "#"; $("t1").textContent = "0:00"; $("t2").textContent = "0:00";
@@ -232,6 +345,21 @@ function route() {
     location.href = "https://cd-trckas-plataforma.vercel.app/exclusive";
     return;
   }
+  const albumOpen = location.hash === "#/album";
+  $("full-album").hidden = !albumOpen;
+  if (albumOpen) {
+    a.pause(); closeVideo();
+    if (!$("full-album-video").getAttribute("src")) $("full-album-video").src = "https://www.youtube-nocookie.com/embed/vR3pjw44lkg?rel=0&playsinline=1";
+    $("album-side-return").hidden = true; document.body.classList.remove("has-album-return");
+    $("pv").classList.remove("show"); $("mini").classList.remove("show");
+    document.body.style.overflow = "hidden"; document.title = "Full Album CD Only Track · KLMR"; want = false; return;
+  }
+  $("full-album-video").removeAttribute("src");
+  const collectionRoute = location.hash.match(/^#\/tracks\/(all|man|girl)$/);
+  if (collectionRoute) {
+    const selectedButton = document.querySelector('#albums button[data-cd="' + collectionRoute[1] + '"]');
+    selectedButton.click();
+  }
   const m = location.hash.match(/^#\/(\d+)$/), n = m ? +m[1] : 0;
   if (n >= 1 && n <= T.length) {
     if (n !== cur) load(n);
@@ -239,8 +367,10 @@ function route() {
     if (want) { a.play().catch(() => {}); want = false; }
   } else { $("pv").classList.remove("show"); document.body.style.overflow = ""; document.title = "KLMR · Singles — CD TRCKAS"; }
   $("mini").classList.toggle("show", cur > 0 && !$("pv").classList.contains("show"));
+  const showAlbumReturn = !$("track-library").hidden || $("pv").classList.contains("show");
+  $("album-side-return").hidden = !showAlbumReturn; document.body.classList.toggle("has-album-return", showAlbumReturn);
 }
-function step(d) { go(((cur - 1 + d + T.length) % T.length) + 1, true); }
+function step(d) { const tracks = albumTracks(), i = tracks.indexOf(cur); go(i < 0 ? (d > 0 ? tracks[0] : tracks[tracks.length-1]) : tracks[(i + d + tracks.length) % tracks.length], true); }
 function toggle() { if (!cur) return; a.paused ? a.play().catch(() => { $("msg").textContent = "No se pudo reproducir el audio."; }) : a.pause(); }
 
 $("pp").onclick = toggle; $("mp").onclick = e => { e.stopPropagation(); toggle(); };
@@ -257,7 +387,7 @@ $("sk").addEventListener("input", () => { drag = true; $("t1").textContent = fmt
 $("sk").addEventListener("change", () => { if (a.duration) a.currentTime = $("sk").value / 1000 * a.duration; drag = false; });
 
 document.addEventListener("contextmenu", e => { if (e.target.closest("#pv,.card,#mini")) e.preventDefault(); });
-document.addEventListener("keydown", e => { if (e.code === "Space" && $("pv").classList.contains("show") && e.target.tagName !== "BUTTON" && e.target.tagName !== "A") { e.preventDefault(); toggle(); } });
+document.addEventListener("keydown", e => { if (e.code === "Space" && $("pv").classList.contains("show") && e.target.tagName !== "BUTTON" && e.target.tagName !== "A" && e.target.tagName !== "INPUT" && e.target.tagName !== "SUMMARY" && e.target.tagName !== "TEXTAREA") { e.preventDefault(); toggle(); } });
 function closeVideo() { $("vb").classList.remove("show"); $("vf").src = "about:blank"; $("vd").textContent = "▶ Ver video"; }
 $("vd").onclick = () => {
   if ($("vb").classList.contains("show")) { closeVideo(); return; }
@@ -266,9 +396,17 @@ $("vd").onclick = () => {
 };
 a.addEventListener("play", () => { if ($("vb").classList.contains("show")) closeVideo(); });
 
-// Ocultar caja de descarga APK cuando se navega dentro del contenedor APK
+// El botón de la app no se muestra dentro de la propia app (WebView) ni en iPhone/iPad.
 if (/KLMRApp\/|; wv\)|iPhone|iPad/.test(navigator.userAgent)) $("apkbox").hidden = true;
+$("full-album-tracklist").replaceChildren(...T.map(t => { const li = document.createElement("li"); li.textContent = t[0] + (t[1] ? " — " + t[1] : ""); return li; }));
 addEventListener("hashchange", route); route();
 </script>
+<script src="visits.js" defer></script>
+<script type="module" src="community.js"></script>
+
+addEventListener("hashchange", route); route();
+</script>
+<script src="visits.js" defer></script>
+<script type="module" src="community.js"></script>
 </body>
 </html>
